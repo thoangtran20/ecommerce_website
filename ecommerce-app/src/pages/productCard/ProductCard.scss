@@ -63,4 +63,22 @@
     color: #10a19d;
     border: 1px solid #cce7d0;
   }
+
+  .heart {
+    font-size: 1.2rem;
+    // display: flex;
+    margin: 0 auto;
+    line-height: 20px;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    border-radius: 50px;
+    background-color: #eff5f5;
+    font-weight: 500;
+    position: absolute;
+    bottom: 70px;
+    right: 10px;
+    color: #eb455f;
+    border: 1px solid #cce7d0;
+  }
 }

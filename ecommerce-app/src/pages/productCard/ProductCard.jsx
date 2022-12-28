@@ -1,21 +1,20 @@
 import React from 'react'
-import f1 from '../../assets/images/products/f1.jpg'
-import { Col } from 'reactstrap'
+import { Col, NavItem } from 'reactstrap'
 import './ProductCard.scss'
 import { RiStarFill } from 'react-icons/ri'
-import { BsFillCartPlusFill } from 'react-icons/bs'
+import { BsFillCartPlusFill, BsFillSuitHeartFill } from 'react-icons/bs'
 
-const ProductCard = () => {
+const ProductCard = ({ item }) => {
   return (
     <>
       <Col lg="3" md="4" className="mb-2">
         <div className="product__item">
           <div className="product__img">
-            <img src={f1} alt="" />
+            <img src={item.image} alt="" />
           </div>
           <div className="product__info">
-            <span>adidas</span>
-            <h5>Cartoon Astronaut T-Shirts</h5>
+            <span>{item.brand}</span>
+            <h5>{item.name}</h5>
             <div className="star">
               <i>
                 <RiStarFill />
@@ -33,8 +32,13 @@ const ProductCard = () => {
                 <RiStarFill />
               </i>
             </div>
-            <h4>$78</h4>
+            <h4>${item.price}</h4>
           </div>
+          <a href="">
+            <i className="heart">
+              <BsFillSuitHeartFill />
+            </i>
+          </a>
           <a href="">
             <i className="cart">
               <BsFillCartPlusFill />

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import {
   RiShoppingBagLine,
   RiHeartLine,
@@ -7,7 +7,7 @@ import {
 } from 'react-icons/ri'
 import { Container, Row } from 'reactstrap'
 import { motion } from 'framer-motion'
-import logo from '../../assets/images/pngtree-fashion-simple-logo-design-vintage-and-modern-style-abstract-back-color-png-image_4291017.jpg'
+import logo from '../../assets/images/fashion-company-logo-png-transparent.png'
 import userIcon from '../../assets/images/user-icon.png'
 import './Header.scss'
 import { Link, NavLink } from 'react-router-dom'
@@ -37,13 +37,32 @@ const Header = () => {
   ]
 
   const menuRef = useRef(null)
+  const headerRef = useRef(null)
 
   const menuToggle = () => {
     menuRef.current.classList.toggle('active__menu')
   }
 
+  const stickyHeaderFunction = () => {
+    window.addEventListener('scroll', () => {
+      if (
+        document.body.scrollTop > 80 ||
+        document.documentElement.scrollTop > 80
+      ) {
+        headerRef.current.classList.add('sticky__header')
+      } else {
+        headerRef.current.classList.remove('sticky__header')
+      }
+    })
+  }
+  useEffect(() => {
+    stickyHeaderFunction()
+
+    return () => window.removeEventListener('scroll', stickyHeaderFunction)
+  })
+
   return (
-    <header className="header">
+    <header className="header" ref={headerRef}>
       <Container>
         <Row>
           <div className="nav__wrapper">
@@ -55,7 +74,7 @@ const Header = () => {
               </Link>
             </div>
             <div className="navigation" ref={menuRef} onClick={menuToggle}>
-              <ul className="menu">
+              <ul className="menu" id="navbar">
                 {nav__links.map((item, index) => (
                   <li className="nav__item" key={index}>
                     {/* <NavLink>{item.display}</NavLink> */}
@@ -94,14 +113,19 @@ const Header = () => {
               <span>
                 <motion.img whileTap={{ scale: 1.2 }} src={userIcon} alt="" />
               </span>
+            </div>
 
-              <div className="mobile__menu">
-                <span>
+            <div className="mobile__menu">
+              <span onClick={menuToggle}>
+                <i>
+                  <RiMenuLine />
+                </i>
+              </span>
+              {/* <span className="cart__icon">
                   <i>
-                    <RiMenuLine />
+                    <RiShoppingBagLine />
                   </i>
-                </span>
-              </div>
+                </span> */}
             </div>
           </div>
         </Row>

@@ -1,63 +1,189 @@
+// .footer {
+//   padding-top: 60px;
+//   padding-bottom: 30px;
+//   background-color: #0a1d37;
+//   .logo {
+//     h1 {
+//       font-size: 1.5rem;
+//     }
+//   }
+
+//   .footer__text {
+//     line-height: 30px;
+//     color: rgba(255, 255, 255, 0.5);
+//   }
+
+//   .footer__quick-links {
+//     .quick__links-title {
+//       margin-bottom: 30px;
+//       color: #fff;
+//       font-size: 1.1rem;
+//     }
+
+//     ul {
+//       background: transparent !important;
+//     }
+//     li {
+//       color: rgba(255, 255, 255, 0.5);
+//       background: transparent !important;
+//     }
+//     a {
+//       text-decoration: none;
+//       color: unset;
+//       color: rgba(255, 255, 255, 0.5);
+//     }
+//   }
+
+//   .footer__contact {
+//     li {
+//       color: rgba(255, 255, 255, 0.5);
+//       p {
+//         color: rgba(255, 255, 255, 0.5);
+//         font-size: 0.9rem;
+//       }
+
+//       span {
+//         font-size: 1.2rem;
+//         color: rgba(255, 255, 255, 0.5);
+
+//         i {
+//           display: flex;
+//           align-items: center;
+//           padding-bottom: 10px;
+//         }
+//       }
+//     }
+//   }
+
+//   .footer__copyright {
+//     color: rgba(255, 255, 255, 0.5);
+//     font-size: 0.9rem;
+//     text-align: center;
+//   }
+// }
+
 .footer {
-  padding-top: 60px;
-  padding-bottom: 30px;
-  background-color: #0a1d37;
-  .logo {
-    h1 {
-      font-size: 1.5rem;
-    }
-  }
+  padding: 40px 80px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 
-  .footer__text {
-    line-height: 30px;
-    color: rgba(255, 255, 255, 0.5);
-  }
+  .col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
 
-  .footer__quick-links {
-    .quick__links-title {
+    .logo {
+      display: flex;
       margin-bottom: 30px;
-      color: #fff;
-      font-size: 1.1rem;
+      align-items: center;
+      column-gap: 10px;
+
+      img {
+        width: 4rem;
+        height: 4rem;
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+      }
     }
 
-    ul {
-      background: transparent !important;
-    }
-    li {
-      color: rgba(255, 255, 255, 0.5);
-      background: transparent !important;
-    }
-    a {
-      text-decoration: none;
-      color: unset;
-      color: rgba(255, 255, 255, 0.5);
+    span {
+      font-size: 1.8rem;
+      font-weight: 700;
+      font-family: 'Cormorant Garamond', serif;
+      color: #425f57;
     }
   }
 
-  .footer__contact {
-    li {
-      color: rgba(255, 255, 255, 0.5);
-      p {
-        color: rgba(255, 255, 255, 0.5);
-        font-size: 0.9rem;
-      }
+  h4 {
+    font-weight: 700;
+    color: #2c2e43;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    padding-bottom: 20px;
+  }
+  p {
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    margin: 0 0 8px 0;
+  }
+  a {
+    font-size: 14px;
+    // color: #b2b1b9;
+    color: #222;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 10px;
+  }
+  a:hover {
+    color: #219f94;
+    font-weight: 700;
+  }
+  .follow {
+    margin-top: 20px;
+    i {
+      color: #465b52;
+      padding-right: 8px;
+      cursor: pointer;
+    }
+    .facebook:hover {
+      color: #5800ff;
+    }
+    .twitter:hover {
+      color: #009eff;
+    }
+    .instagram:hover {
+      color: #fb2576;
+    }
+    .pinterest:hover {
+      color: #f7ec09;
+    }
+    .youtube:hover {
+      color: #f55353;
+    }
+  }
+  .install {
+    .row {
+      width: 450px;
+      height: auto;
+      display: flex;
+      align-items: flex-start;
 
-      span {
-        font-size: 1.2rem;
-        color: rgba(255, 255, 255, 0.5);
-
-        i {
-          display: flex;
-          align-items: center;
-          padding-bottom: 10px;
-        }
+      .app {
+        width: 40%;
+        margin-left: 10px;
+        border: 1px solid #088178;
+        border-radius: 6px;
+        margin-right: 10px;
+        object-fit: cover;
+        // background-size: contain;
+        background-repeat: no-repeat;
       }
+      .play {
+        width: 40%;
+        // margin-left: 10px;
+        border: 1px solid #088178;
+        border-radius: 6px;
+        object-fit: cover;
+        // background-size: contain;
+        background-repeat: no-repeat;
+      }
+    }
+    img {
+      margin: 10px 0 15px 0;
     }
   }
 
-  .footer__copyright {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.9rem;
+  .copyright {
     text-align: center;
+    width: 100%;
+
+    p {
+      font-family: 'Josefin Sans', sans-serif;
+      color: #404258;
+      font-size: 14px;
+    }
   }
 }

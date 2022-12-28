@@ -36,14 +36,14 @@ p {
 }
 
 p {
-	color: var(--small-text-color);
+	/* color: var(--small-text-color); */
 	font-size: 1rem;
 }
 
-h1,
+/* h1,
 h2 {
 	font-size: var(--heading-fontSize);
-}
+} */
 
 ul {
 	list-style: none;
@@ -53,8 +53,16 @@ a {
 	text-decoration: none;
 	color: unset;
 }
-/* 
-img {
+
+.section-p1 {
+	padding: 40px 80px;
+}
+
+.section-m1 {
+	margin: 40px 0px;
+}
+
+/* img {
 	width: 100%;
 } */
 
