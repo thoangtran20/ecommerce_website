@@ -12,7 +12,8 @@ import { motion } from 'framer-motion'
 import logo from '../../assets/images/fashion-company-logo-png-transparent.png'
 import userIcon from '../../assets/images/user-icon.png'
 import './Header.scss'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { ROUTERS } from '../../constants'
 
 const Header = () => {
   const nav__links = [
@@ -37,9 +38,13 @@ const Header = () => {
       display: 'Blog',
     },
   ]
-
+  const navigate = useNavigate()
   const menuRef = useRef(null)
   const headerRef = useRef(null)
+
+  const navigateToCart = () => {
+    navigate(ROUTERS.cart)
+  }
 
   const menuToggle = () => {
     menuRef.current.classList.toggle('active__menu')
@@ -111,7 +116,7 @@ const Header = () => {
                 </i>
                 <span className="badge">1</span>
               </span>
-              <span className="cart__icon">
+              <span className="cart__icon" onClick={navigateToCart}>
                 <i>
                   <RiShoppingBagLine />
                 </i>

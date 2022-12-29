@@ -20,6 +20,7 @@
     "reactstrap": "^9.1.5",
     "redux": "^4.2.0",
     "redux-saga": "^1.2.2",
+    "styled-components": "^5.3.6",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

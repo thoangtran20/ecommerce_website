@@ -1,0 +1,51 @@
+.product__action {
+  width: 100%;
+  .top {
+    width: 100%;
+    border-bottom: 2px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .icons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      & > * {
+        margin-right: 7px;
+        cursor: pointer;
+      }
+      .sort {
+        justify-self: flex-end;
+        margin-left: 200px;
+        label {
+          font-size: 1.2rem;
+          font-weight: 500;
+          margin: 0 10px;
+        }
+        select {
+          font-size: 1.2rem;
+          font-weight: 400;
+          border: none;
+          outline: none;
+
+          option {
+            font-size: 1rem;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 799px) {
+  .top {
+    flex-direction: column;
+    align-items: start;
+    padding-bottom: 5px;
+  }
+  .search {
+    width: 100%;
+  }
+}

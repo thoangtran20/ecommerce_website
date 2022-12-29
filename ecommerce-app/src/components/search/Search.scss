@@ -1,0 +1,26 @@
+.search {
+  margin: 5px 0px;
+  position: relative;
+  margin-left: 20px;
+  flex: 1;
+
+  .icon {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+  }
+
+  input {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 300;
+    padding: 0.3rem;
+    padding-left: 3rem;
+    margin: 1rem auto;
+    width: 150%;
+    border: 1px solid #777;
+    border-radius: 4px;
+    outline: none;
+  }
+}

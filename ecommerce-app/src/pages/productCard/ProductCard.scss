@@ -15,11 +15,39 @@
   .product__img {
     img {
       width: 100%;
+      display: block;
       object-fit: cover;
       border-radius: 20px;
+      transition: all 0.3s linear;
+    }
+    .link {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -130%);
+      background: #ff731d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      transition: all 0.3s linear;
+      opacity: 0;
+      cursor: pointer;
+      svg {
+        font-size: 1.25rem;
+        color: #fff;
+      }
     }
   }
 
+  .product__img:hover img {
+    opacity: 0.5;
+  }
+  .product__img:hover .link {
+    opacity: 1;
+  }
   .product__info {
     text-align: start;
     padding: 10px 0;

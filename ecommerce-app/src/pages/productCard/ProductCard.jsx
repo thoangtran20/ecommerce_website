@@ -1,8 +1,9 @@
 import React from 'react'
 import { Col, NavItem } from 'reactstrap'
 import './ProductCard.scss'
-import { RiStarFill } from 'react-icons/ri'
+import { RiSearchLine, RiStarFill } from 'react-icons/ri'
 import { BsFillCartPlusFill, BsFillSuitHeartFill } from 'react-icons/bs'
+import { Link } from 'react-router-dom'
 
 const ProductCard = ({ item }) => {
   return (
@@ -11,6 +12,9 @@ const ProductCard = ({ item }) => {
         <div className="product__item">
           <div className="product__img">
             <img src={item.image} alt="" />
+            <Link to="" className="link">
+              <RiSearchLine />
+            </Link>
           </div>
           <div className="product__info">
             <span>{item.brand}</span>
