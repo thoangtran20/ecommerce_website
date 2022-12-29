@@ -268,7 +268,13 @@
 //   }
 // }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 477px) {
+  .header {
+    padding: 10px 30px;
+  }
+}
+
+@media only screen and (max-width: 799px) {
   .navigation {
     position: fixed;
     top: 0;
@@ -291,6 +297,16 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
+
+    .close {
+      position: absolute;
+      display: initial;
+      cursor: pointer;
+      top: 0px;
+      left: 10px;
+      color: #ff1818;
+      font-size: 20px;
+    }
   }
 
   .active__menu {
@@ -298,6 +314,7 @@
   }
 
   .mobile__menu {
+    cursor: pointer;
     // display: inline-block;
     span {
       i {
@@ -340,6 +357,9 @@
 
 @media only screen and (min-width: 992px) {
   .mobile__menu {
+    display: none;
+  }
+  .close {
     display: none;
   }
 }

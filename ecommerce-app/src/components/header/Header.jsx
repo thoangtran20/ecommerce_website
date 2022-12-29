@@ -5,6 +5,8 @@ import {
   RiMenuLine,
   RiSearchLine,
 } from 'react-icons/ri'
+
+import { FaTimes } from 'react-icons/fa'
 import { Container, Row } from 'reactstrap'
 import { motion } from 'framer-motion'
 import logo from '../../assets/images/fashion-company-logo-png-transparent.png'
@@ -73,7 +75,7 @@ const Header = () => {
                 <span style={{ color: '#eeb808' }}>Store</span>
               </Link>
             </div>
-            <div className="navigation" ref={menuRef} onClick={menuToggle}>
+            <div className="navigation" ref={menuRef}>
               <ul className="menu" id="navbar">
                 {nav__links.map((item, index) => (
                   <li className="nav__item" key={index}>
@@ -89,6 +91,11 @@ const Header = () => {
                     </NavLink>
                   </li>
                 ))}
+                <span className="close" onClick={menuToggle}>
+                  <i>
+                    <FaTimes />
+                  </i>
+                </span>
               </ul>
             </div>
 

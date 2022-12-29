@@ -82,3 +82,15 @@
     border: 1px solid #cce7d0;
   }
 }
+
+@media only screen and (max-width: 799px) {
+  .product__item {
+    margin: 15px;
+  }
+}
+
+@media only screen and (max-width: 477px) {
+  .product__item {
+    width: 100%;
+  }
+}

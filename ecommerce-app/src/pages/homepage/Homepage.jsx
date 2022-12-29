@@ -90,19 +90,19 @@ const Homepage = () => {
         <section className="pr__banner">
           <Container>
             <Row>
-              <Col lg="4" md="3">
+              <Col lg="4" md="">
                 <div className="banner__box">
                   <h2>Personal Sale</h2>
                   <h3>Winter Collection -50% OFF</h3>
                 </div>
               </Col>
-              <Col lg="4" md="3">
+              <Col lg="4" md="">
                 <div className="banner__box banner__box2">
                   <h2>New Football Collection</h2>
                   <h3>Spring / Summer 2023</h3>
                 </div>
               </Col>
-              <Col lg="4" md="3">
+              <Col lg="4" md="">
                 <div className="banner__box banner__box3">
                   <h2>T-shirts</h2>
                   <h3>New Trendy Products</h3>

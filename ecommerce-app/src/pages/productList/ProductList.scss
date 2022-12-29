@@ -5,3 +5,10 @@
   padding-top: 20px;
   flex-wrap: wrap;
 }
+
+@media only screen and (max-width: 799px) {
+  .product__container {
+    justify-content: center;
+  }
+  
+}

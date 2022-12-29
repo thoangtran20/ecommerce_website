@@ -223,3 +223,62 @@
     }
   }
 }
+
+@media only screen and (max-width: 799px) {
+  .homepage {
+    .banner {
+      height: 34vh;
+    }
+    .sm__banner {
+      .banner__box {
+        min-width: 100%;
+        height: 40vh;
+        padding: 30px;
+      }
+    }
+    .pr__banner {
+      padding: 0 30px;
+      .banner__box {
+        width: 100%;
+        text-align: left;
+      }
+    }
+    .new__letter {
+      .form {
+        width: 70%;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 477px) {
+  .homepage {
+    .banner {
+      height: 40vh;
+    }
+    .sm__banner {
+      .banner__box {
+        height: 40vh;
+        // margin-left: 10px;
+        margin-right: 40px;
+      }
+      .banner__box2 {
+        margin-top: 20px;
+      }
+    }
+    .pr__banner {
+      padding: 0 20px;
+
+      .banner__box {
+        width: 100%;
+      }
+    }
+
+    .new__letter {
+      padding: 40px 20px;
+      .form {
+        width: 100%;
+      }
+    }
+  }
+}

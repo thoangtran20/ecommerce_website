@@ -1,7 +1,9 @@
 .feature {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+  // display: flex;
+  // align-items: center;
+  // overflow: hidden;
+
+  // flex-wrap: wrap;
   margin: 40px;
   .fe__box {
     width: 180px;
@@ -15,6 +17,7 @@
     img {
       width: 100%;
       margin-bottom: 10px;
+      object-fit: cover;
     }
 
     h6 {
@@ -57,6 +60,31 @@
   :nth-child(6) {
     h6 {
       background-color: #fff2e5;
+    }
+  }
+}
+
+@media only screen and (max-width: 799px) {
+  .feature {
+    display: flex;
+    overflow-x: hidden !important;
+    align-items: center;
+    justify-content: center;
+
+    .fe__box {
+      margin: 15px 15px;
+      padding: 10px;
+      // width: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: 477px) {
+  .feature {
+    justify-content: space-between;
+    .fe__box {
+      width: 155px;
+      margin: 0 0 15px 0;
     }
   }
 }
