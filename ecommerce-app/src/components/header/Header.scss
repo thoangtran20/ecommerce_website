@@ -32,9 +32,10 @@
 
   .menu {
     display: flex;
-    align-items: center;
+    // align-items: center;
     column-gap: 2.7rem;
     font-size: 1.2rem;
+    align-items: flex-end;
     font-weight: 700;
     font-family: 'Josefin Sans', sans-serif;
     margin-bottom: 0;
@@ -160,11 +161,17 @@
     right: 0;
     width: 250px;
     height: 100%;
+    padding-right: 10px;
     background-color: #fff;
     z-index: 99999;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
+
+    .nav__icons {
+      display: flex;
+      margin-left: 0.5rem;
+    }
 
     .close {
       position: absolute;
@@ -222,6 +229,10 @@
     }
   }
 
+  .nav__wrapper > .nav__icons {
+    display: none;
+  }
+
   .header {
     width: 100%;
     height: 60px;
@@ -235,5 +246,10 @@
   }
   .close {
     display: none;
+  }
+  .menu {
+    .nav__icons {
+      display: none;
+    }
   }
 }

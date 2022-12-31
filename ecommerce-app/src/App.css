@@ -4,9 +4,33 @@
 :root {
 	--card-bg-01: #fdefe6;
 	--card-bg-02: #d6e5fb;
+	--dark-blue: #0a1930;
+	--light-blue: #1f93ff;
+
+	--color-white: #fff;
+	--color-dark: #333;
+
+	--color-grey: #eee;
+	--box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+	--color-purple: #9d0191;
+	--color-orange: #ff7722;
+
+	--color-primary: #007bff;
+	--color-success: #28a745;
+	--color-danger: orangered;
+
+	--color-yellow: #eff309;
 	--card-bg-03: #ceebe9;
+	--white: #fff;
+	--black: #222;
+	--green: #6cbe02;
+	--grey1: #f0f0f0;
+	--grey2: #e9d7d3;
 	--card-bg-04: #e2f2b2;
 	--primary-color: #0a1d37;
+	--green-color: #6cbe02;
+	--red-color: #f90716;
 	--hero-bg: #d6e5fb;
 	--heading-fontSize: 2rem;
 	--small-text-color: #999;

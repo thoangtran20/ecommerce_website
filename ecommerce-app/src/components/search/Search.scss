@@ -1,7 +1,7 @@
 .search {
   margin: 5px 0px;
   position: relative;
-  margin-left: 20px;
+  margin-left: 10px;
   flex: 1;
 
   .icon {
@@ -17,10 +17,18 @@
     font-weight: 300;
     padding: 0.3rem;
     padding-left: 3rem;
+    width: 100%;
     margin: 1rem auto;
-    width: 150%;
     border: 1px solid #777;
     border-radius: 4px;
     outline: none;
+  }
+}
+
+@media only screen and (max-width: 699px) {
+  .search {
+    input {
+      width: 350px;
+    }
   }
 }

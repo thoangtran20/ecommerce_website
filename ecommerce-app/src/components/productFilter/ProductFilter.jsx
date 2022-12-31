@@ -9,7 +9,7 @@ const ProductFilter = () => {
   console.log(productsData)
 
   return (
-    <div className="filter">
+    <div className="product__filter">
       <h4>Categories</h4>
       <div className="category">
         <button className="">All</button>

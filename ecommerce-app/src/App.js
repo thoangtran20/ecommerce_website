@@ -7,6 +7,7 @@ import Shop from './pages/shop/Shop'
 import CustomerLayout from './layouts/customer-layout/CustomerLayout'
 import Cart from './pages/cart/Cart'
 import NotFound from './pages/notfound/NotFound'
+import ProductDetail from './pages/productDetail/ProductDetail'
 
 function App() {
   return (
@@ -21,6 +22,10 @@ function App() {
           <Route
             path={ROUTERS.shop}
             element={<CustomerLayout content={<Shop />} />}
+          />
+          <Route
+            path={ROUTERS.productDetail}
+            element={<CustomerLayout content={<ProductDetail />} />}
           />
           <Route
             path={ROUTERS.cart}

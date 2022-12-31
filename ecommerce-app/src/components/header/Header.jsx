@@ -18,23 +18,23 @@ import { ROUTERS } from '../../constants'
 const Header = () => {
   const nav__links = [
     {
-      path: 'home',
+      path: '/',
       display: 'Home',
     },
     {
-      path: 'shop',
+      path: '/shop',
       display: 'Shop',
     },
     {
-      path: 'about',
+      path: '/about',
       display: 'About',
     },
     {
-      path: 'Contact',
+      path: '/contact',
       display: 'Contact',
     },
     {
-      path: 'Contact',
+      path: '/blog',
       display: 'Blog',
     },
   ]
@@ -96,6 +96,32 @@ const Header = () => {
                     </NavLink>
                   </li>
                 ))}
+                <div className="nav__icons">
+                  <span className="search__icon">
+                    <i>
+                      <RiSearchLine />
+                    </i>
+                  </span>
+                  <span className="fav__icon">
+                    <i>
+                      <RiHeartLine />
+                    </i>
+                    <span className="badge">1</span>
+                  </span>
+                  <span className="cart__icon" onClick={navigateToCart}>
+                    <i>
+                      <RiShoppingBagLine />
+                    </i>
+                    <span className="badge"></span>
+                  </span>
+                  <span>
+                    <motion.img
+                      whileTap={{ scale: 1.2 }}
+                      src={userIcon}
+                      alt=""
+                    />
+                  </span>
+                </div>
                 <span className="close" onClick={menuToggle}>
                   <i>
                     <FaTimes />

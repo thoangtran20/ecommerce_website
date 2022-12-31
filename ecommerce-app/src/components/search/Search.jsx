@@ -5,7 +5,11 @@ import './Search.scss'
 const Search = ({ value, onChange }) => {
   return (
     <div className="search">
-      <BiSearch size={18} className="icon" />
+      <span>
+        <i>
+          <BiSearch size={18} className="icon" />
+        </i>
+      </span>
       <input
         type="text"
         placeholder="Search by name"

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, NavItem } from 'reactstrap'
+import { Col } from 'reactstrap'
 import './ProductCard.scss'
 import { RiSearchLine, RiStarFill } from 'react-icons/ri'
 import { BsFillCartPlusFill, BsFillSuitHeartFill } from 'react-icons/bs'
@@ -12,13 +12,13 @@ const ProductCard = ({ item }) => {
         <div className="product__item">
           <div className="product__img">
             <img src={item.image} alt="" />
-            <Link to="" className="link">
+            <Link to={`/shop/${item.id}`} className="link">
               <RiSearchLine />
             </Link>
           </div>
-          <div className="product__info">
-            <span>{item.brand}</span>
-            <h5>{item.name}</h5>
+          <div className="product__info p2">
+            <span className="d-block">{item.brand}</span>
+            <h5>{item.productName}</h5>
             <div className="star">
               <i>
                 <RiStarFill />
@@ -38,16 +38,16 @@ const ProductCard = ({ item }) => {
             </div>
             <h4>${item.price}</h4>
           </div>
-          <a href="">
+          <Link to="">
             <i className="heart">
               <BsFillSuitHeartFill />
             </i>
-          </a>
-          <a href="">
+          </Link>
+          <Link to="">
             <i className="cart">
               <BsFillCartPlusFill />
             </i>
-          </a>
+          </Link>
         </div>
       </Col>
     </>
