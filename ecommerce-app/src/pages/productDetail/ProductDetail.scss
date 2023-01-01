@@ -34,7 +34,7 @@
       font-weight: 700;
     }
     h2 {
-      font-size: 24px;
+      // font-size: 24px;
       margin-bottom: 10px;
       font-family: 'Josefin Sans', sans-serif;
     }
@@ -95,35 +95,6 @@
       border: none;
       outline: none;
       transition: 0.2s;
-    }
-
-    .quantity {
-      margin-top: 15px;
-      margin-bottom: 15px;
-      display: grid;
-      width: 120px;
-      justify-items: center;
-      grid-template-columns: repeat(3, 1fr);
-      background-color: transparent;
-      border-radius: 10px;
-      // color: var(--white);
-      align-items: center;
-      .quantity__input {
-        margin-top: 15px;
-        font-size: 26px;
-      }
-      .quantity__btn {
-        background: transparent;
-        border-color: transparent;
-        cursor: pointer;
-        padding: 1rem 0;
-        font-size: 20px;
-        width: 2rem;
-        height: 1rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
     }
   }
 

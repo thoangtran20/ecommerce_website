@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import Helmet from '../../components/helmet/Helmet'
+import { toast } from 'react-toastify'
 
 import { products } from '../../data/ProductData'
 import './ProductDetail.scss'
@@ -9,23 +10,39 @@ import { Col, Container, Row } from 'reactstrap'
 import { RiStarSFill, RiStarHalfFill } from 'react-icons/ri'
 import ProductList from '../productList/ProductList'
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
+import { useDispatch } from 'react-redux'
+import { ADD_TO_CART, cartActions } from '../../stores/slice/cartSlice'
+import AmountButton from '../../components/amount-button/AmountButton'
 
 const ProductDetail = () => {
   const { id } = useParams()
-  const [quantity, setQuantity] = useState(1)
 
   const product = products.find((item) => item.id === id)
+  const [amount, setAmount] = useState(1)
 
-  const updateQuantity = (type) => {
-    if (type === 'plus') {
-      setQuantity(quantity + 1)
-    } else {
-      setQuantity(quantity - 1 < 1 ? 1 : quantity - 1)
-    }
+  const increase = () => {
+    setAmount((oldAmount) => {
+      let tempAmount = oldAmount + 1
+      if (tempAmount > stock) {
+        tempAmount = stock
+      }
+      return tempAmount
+    })
+  }
+  const decrease = () => {
+    setAmount((oldAmount) => {
+      let tempAmount = oldAmount - 1
+      if (tempAmount < 1) {
+        tempAmount = 1
+      }
+      return tempAmount
+    })
   }
 
+  const dispatch = useDispatch()
+
   const {
-    image: img1,
+    imgUrl: img1,
     img2,
     img3,
     img4,
@@ -42,14 +59,21 @@ const ProductDetail = () => {
 
   console.log(product)
 
-  console.log(img1)
+  // console.log(img1)
 
   const [previewImg, setPreviewImg] = useState(img1)
 
   useEffect(() => {
     setPreviewImg(img1)
-    setQuantity(1)
   }, [product])
+
+  const addToCart = () => {
+    const cartItem = { sku, imgUrl: img1, productName, price, amount }
+    console.log(cartItem)
+    dispatch(cartActions.ADD_TO_CART(cartItem))
+
+    toast.success('Product added successfully')
+  }
 
   const relatedProducts = products.filter((item) => item.category === category)
 
@@ -157,26 +181,14 @@ const ProductDetail = () => {
                 <h4>Product Details</h4>
                 <span>{description}</span>
                 {/* <input type="number" value="1" /> */}
-                <div className="quantity">
-                  <div
-                    className="quantity__btn"
-                    onClick={() => updateQuantity('minus')}
-                  >
-                    <i>
-                      <AiOutlineMinus />
-                    </i>
-                  </div>
-                  <h2 className="quantity__input">{quantity}</h2>
-                  <div
-                    className="quantity__btn"
-                    onClick={() => updateQuantity('plus')}
-                  >
-                    <i>
-                      <AiOutlinePlus />
-                    </i>
-                  </div>
-                </div>
-                {stock > 0 && <button>Add To Cart</button>}
+                {stock > 0 && (
+                  <AmountButton
+                    amount={amount}
+                    decrease={decrease}
+                    increase={increase}
+                  />
+                )}
+                {stock > 0 && <button onClick={addToCart}>Add To Cart</button>}
               </div>
             </Col>
 
