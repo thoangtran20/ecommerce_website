@@ -50,6 +50,10 @@ const Header = () => {
     menuRef.current.classList.toggle('active__menu')
   }
 
+  const gotoLogin = () => {
+    navigate('/login')
+  }
+
   const stickyHeaderFunction = () => {
     window.addEventListener('scroll', () => {
       if (
@@ -148,7 +152,7 @@ const Header = () => {
                 </i>
                 <span className="badge"></span>
               </span>
-              <span>
+              <span onClick={gotoLogin}>
                 <motion.img whileTap={{ scale: 1.2 }} src={userIcon} alt="" />
               </span>
             </div>

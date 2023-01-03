@@ -5,6 +5,9 @@ export const ROUTERS = {
   home: '/',
   shop: '/shop',
   cart: '/cart',
+  login: 'login',
+  register: 'register',
+  reset: 'reset',
 }
 
 export const localStorageKey = {

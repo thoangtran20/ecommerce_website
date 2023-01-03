@@ -8,6 +8,9 @@ import CustomerLayout from './layouts/customer-layout/CustomerLayout'
 import Cart from './pages/cart/Cart'
 import NotFound from './pages/notfound/NotFound'
 import ProductDetail from './pages/productDetail/ProductDetail'
+import Login from './pages/auth/Login'
+import Register from './pages/auth/Register'
+import Reset from './pages/auth/Reset'
 
 function App() {
   return (
@@ -30,6 +33,18 @@ function App() {
           <Route
             path={ROUTERS.cart}
             element={<CustomerLayout content={<Cart />} />}
+          />
+          <Route
+            path={ROUTERS.login}
+            element={<CustomerLayout content={<Login />} />}
+          />
+          <Route
+            path={ROUTERS.register}
+            element={<CustomerLayout content={<Register />} />}
+          />
+          <Route
+            path={ROUTERS.reset}
+            element={<CustomerLayout content={<Reset />} />}
           />
           <Route path="*" element={<NotFound />} />
         </Routes>
