@@ -11,12 +11,14 @@ import ProductDetail from './pages/productDetail/ProductDetail'
 import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
 import Reset from './pages/auth/Reset'
+import { ToastContainer } from 'react-toastify'
 
 function App() {
   return (
     <div className="App">
       {/* <Header /> */}
       <BrowserRouter>
+        <ToastContainer />
         <Routes>
           <Route
             path={ROUTERS.home}

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {
   RiShoppingBagLine,
   RiHeartLine,
@@ -7,13 +7,17 @@ import {
 } from 'react-icons/ri'
 
 import { FaTimes } from 'react-icons/fa'
-import { Container, Row } from 'reactstrap'
+import { Button, Container, Row } from 'reactstrap'
 import { motion } from 'framer-motion'
 import logo from '../../assets/images/fashion-company-logo-png-transparent.png'
 import userIcon from '../../assets/images/user-icon.png'
 import './Header.scss'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { ROUTERS } from '../../constants'
+import { Dropdown, Menu, Space } from 'antd'
+import { getAuth, signOut } from 'firebase/auth'
+import { auth } from '../../firebase/config'
+import { toast } from 'react-toastify'
 
 const Header = () => {
   const nav__links = [
@@ -38,9 +42,58 @@ const Header = () => {
       display: 'Blog',
     },
   ]
+
+  const [menuList, setMenuList] = useState([])
+
+  const unauthenticatedMenu = [
+    {
+      key: '1',
+      label: (
+        <NavLink to={'/login'}>
+          <p target="_blank" rel="noopener noreferrer">
+            Login
+          </p>
+        </NavLink>
+      ),
+    },
+  ]
+
+  const authenticatedMenu = [
+    {
+      key: '2',
+      label: (
+        <NavLink to={'/profile'}>
+          <p target="_blank" rel="noopener noreferrer">
+            User Information
+          </p>
+        </NavLink>
+      ),
+    },
+    {
+      key: '3',
+      label: (
+        <NavLink to={'/order-list/confirm'}>
+          <p target="_blank" rel="noopener noreferrer">
+            Order History
+          </p>
+        </NavLink>
+      ),
+    },
+    {
+      key: '4',
+
+      label: (
+        <p target="_blank" rel="noopener noreferrer" onClick={() => {}}>
+          Logout
+        </p>
+      ),
+    },
+  ]
   const navigate = useNavigate()
   const menuRef = useRef(null)
   const headerRef = useRef(null)
+
+  const [visible, setVisible] = useState(false)
 
   const navigateToCart = () => {
     navigate(ROUTERS.cart)
@@ -49,6 +102,23 @@ const Header = () => {
   const menuToggle = () => {
     menuRef.current.classList.toggle('active__menu')
   }
+
+  // const logoutUser = () => {
+  //   signOut(auth)
+  //     .then(() => {
+  //       toast.success('Logout successfully!!!')
+  //       navigate('/')
+  //     })
+  //     .catch((error) => {
+  //       toast.error(error.message)
+  //     })
+  // }
+
+  // useEffect(() => {
+  //   return !userInfo.data
+  //     ? setMenuList(unauthenticatedMenu)
+  //     : setMenuList(authenticatedMenu)
+  // }, [userInfo])
 
   const gotoLogin = () => {
     navigate('/login')
@@ -150,10 +220,32 @@ const Header = () => {
                 <i>
                   <RiShoppingBagLine />
                 </i>
-                <span className="badge"></span>
+                <span className="badge">2</span>
               </span>
               <span onClick={gotoLogin}>
-                <motion.img whileTap={{ scale: 1.2 }} src={userIcon} alt="" />
+                <Space direction="vertical">
+                  <Space wrap>
+                    <Dropdown
+                      overlay={<Menu items={menuList} />}
+                      placement="bottom"
+                    >
+                      <Button
+                        style={{
+                          fontSize: '30px',
+                          background: 'none',
+                          border: 'none',
+                          color: 'black',
+                        }}
+                      >
+                        <motion.img
+                          whileTap={{ scale: 1.2 }}
+                          src={userIcon}
+                          alt=""
+                        />
+                      </Button>
+                    </Dropdown>
+                  </Space>
+                </Space>
               </span>
             </div>
 

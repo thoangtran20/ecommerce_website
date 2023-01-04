@@ -1,7 +1,7 @@
 .header {
   width: 100%;
-  height: 90px;
-  background-color: #d9d7f1;
+  height: 80px;
+  background-color: var(--hero-bg);
   line-height: 70px;
 
   .nav__wrapper {
@@ -195,7 +195,7 @@
     span {
       i {
         color: #404258;
-        font-size: 1.1rem !important;
+        font-size: 1.4rem !important;
       }
       i:hover {
         color: #ff4b5c;
