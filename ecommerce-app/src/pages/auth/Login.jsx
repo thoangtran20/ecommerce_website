@@ -5,17 +5,33 @@ import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { RiGoogleLine } from 'react-icons/ri'
 import Card from '../../components/card/Card'
 import { auth } from '../../firebase/config'
+import { AiFillEyeInvisible as EyeOff, AiFillEye as Eye } from 'react-icons/ai'
 import { toast } from 'react-toastify'
 
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import {
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from 'firebase/auth'
 import Loader from '../../components/loader/Loader'
+import { IconBase } from 'react-icons/lib'
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [passwordType, setPasswordType] = useState('password')
+  const [icon, setIcon] = useState(EyeOff)
+  console.log(icon)
 
   const navigate = useNavigate()
+
+  const show = () => {
+    passwordType === 'password'
+      ? setPasswordType('text')
+      : setPasswordType('password')
+    icon === Eye ? setIcon(EyeOff) : setIcon(Eye)
+  }
 
   const loginUser = (e) => {
     e.preventDefault()
@@ -31,6 +47,20 @@ const Login = () => {
       })
       .catch((error) => {
         setIsLoading(false)
+        toast.error(error.message)
+      })
+  }
+
+  // Login with Google
+  const provider = new GoogleAuthProvider()
+  const signInWithGoogle = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user
+        toast.success('Login Successfully')
+        navigate('/')
+      })
+      .catch((error) => {
         toast.error(error.message)
       })
   }
@@ -53,13 +83,19 @@ const Login = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <input
-                type="password"
-                placeholder="Password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <div className={styles.input}>
+                {' '}
+                <input
+                  type={passwordType}
+                  placeholder="Password"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                {/* <IconBase /> */}
+                <i onClick={show}>{icon}</i>
+              </div>
+
               <button type="submit" className="--btn --btn-primary --btn-block">
                 Login
               </button>
@@ -68,7 +104,10 @@ const Login = () => {
               </div>
               <p>-- or --</p>
             </form>
-            <button className="--btn --btn-danger --btn-block">
+            <button
+              className="--btn --btn-danger --btn-block"
+              onClick={signInWithGoogle}
+            >
               <RiGoogleLine color="#fff" /> Login With Google
             </button>
             <span className={styles.register}>

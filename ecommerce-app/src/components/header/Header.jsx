@@ -81,9 +81,14 @@ const Header = () => {
     },
     {
       key: '4',
-
       label: (
-        <p target="_blank" rel="noopener noreferrer" onClick={() => {}}>
+        <p
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => {
+            logoutUser()
+          }}
+        >
           Logout
         </p>
       ),
@@ -103,16 +108,16 @@ const Header = () => {
     menuRef.current.classList.toggle('active__menu')
   }
 
-  // const logoutUser = () => {
-  //   signOut(auth)
-  //     .then(() => {
-  //       toast.success('Logout successfully!!!')
-  //       navigate('/')
-  //     })
-  //     .catch((error) => {
-  //       toast.error(error.message)
-  //     })
-  // }
+  const logoutUser = () => {
+    signOut(auth)
+      .then(() => {
+        toast.success('Logout successfully!!!')
+        navigate('/')
+      })
+      .catch((error) => {
+        toast.error(error.message)
+      })
+  }
 
   // useEffect(() => {
   //   return !userInfo.data
@@ -222,10 +227,35 @@ const Header = () => {
                 </i>
                 <span className="badge">2</span>
               </span>
-              <span onClick={gotoLogin}>
+              <span>
                 <Space direction="vertical">
                   <Space wrap>
-                    <Dropdown
+                    <p
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => {
+                        gotoLogin()
+                      }}
+                    >
+                      Login
+                    </p>
+                    <p
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => {
+                        logoutUser()
+                      }}
+                    >
+                      Logout
+                    </p>
+
+                    <motion.img
+                      whileTap={{ scale: 1.2 }}
+                      src={userIcon}
+                      alt=""
+                    />
+
+                    {/* <Dropdown
                       overlay={<Menu items={menuList} />}
                       placement="bottom"
                     >
@@ -243,7 +273,7 @@ const Header = () => {
                           alt=""
                         />
                       </Button>
-                    </Dropdown>
+                    </Dropdown> */}
                   </Space>
                 </Space>
               </span>

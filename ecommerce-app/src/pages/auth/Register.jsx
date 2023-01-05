@@ -3,10 +3,11 @@ import { Link, useNavigate } from 'react-router-dom'
 import Card from '../../components/card/Card'
 import registerImg from '../../assets/images/auths/register.png'
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
+import { AiFillEyeInvisible as EyeOff, AiFillEye as Eye } from 'react-icons/ai'
 
 import styles from './auth.module.scss'
 import { RiGoogleLine } from 'react-icons/ri'
-import { toast, ToastContainer } from 'react-toastify'
+import { toast } from 'react-toastify'
 import { auth } from '../../firebase/config'
 import Loader from '../../components/loader/Loader'
 
@@ -15,8 +16,27 @@ const Register = () => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [passwordType, setPasswordType] = useState('password')
+  const [confirmPasswordType, setConfirmPasswordType] = useState('password')
+
+  const [icon, setIcon] = useState(EyeOff)
+  console.log(icon)
 
   const navigate = useNavigate()
+
+  const show = () => {
+    passwordType === 'password'
+      ? setPasswordType('text')
+      : setPasswordType('password')
+    icon === Eye ? setIcon(EyeOff) : setIcon(Eye)
+  }
+
+  const showCPasword = () => {
+    confirmPasswordType === 'password'
+      ? setConfirmPasswordType('text')
+      : setConfirmPasswordType('password')
+    icon === Eye ? setIcon(EyeOff) : setIcon(Eye)
+  }
 
   const registerUser = (e) => {
     e.preventDefault()
@@ -42,7 +62,6 @@ const Register = () => {
   }
   return (
     <>
-      <ToastContainer />
       {isLoading && <Loader />}
       <section className={`wrapper ${styles.auth}`}>
         <Card>
@@ -57,20 +76,27 @@ const Register = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <input
-                type="password"
-                placeholder="Password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <input
-                type="password"
-                placeholder="Confirm Password"
-                required
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
+              <div className={styles.input}>
+                <input
+                  type={passwordType}
+                  placeholder="Password"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <i onClick={show}>{icon}</i>
+              </div>
+
+              <div className={styles.input}>
+                <input
+                  type={confirmPasswordType}
+                  placeholder="Confirm Password"
+                  required
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+                <i onClick={showCPasword}>{icon}</i>
+              </div>
 
               <button className="--btn --btn-primary --btn-block">
                 Register
