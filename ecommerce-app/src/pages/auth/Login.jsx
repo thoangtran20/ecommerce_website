@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './auth.module.scss'
 import loginImg from '../../assets/images/auths/login.jpg'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
@@ -14,7 +14,21 @@ import {
   signInWithPopup,
 } from 'firebase/auth'
 import Loader from '../../components/loader/Loader'
-import { IconBase } from 'react-icons/lib'
+
+import * as yup from 'yup'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .email('Please enter valid email address')
+    .required('Please enter your email address'),
+  password: yup
+    .string()
+    .required('Please enter your password')
+    .min(8, 'Your password must be at least 8 characters or greater'),
+})
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -22,9 +36,18 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [passwordType, setPasswordType] = useState('password')
   const [icon, setIcon] = useState(EyeOff)
-  console.log(icon)
-
   const navigate = useNavigate()
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid, isSubmitting },
+  } = useForm({
+    mode: 'onChange',
+    resolver: yupResolver(schema),
+  })
+
+  console.log(Object.values(errors))
 
   const show = () => {
     passwordType === 'password'
@@ -34,7 +57,9 @@ const Login = () => {
   }
 
   const loginUser = (e) => {
-    e.preventDefault()
+    // e.preventDefault()
+    if (!isValid) return
+
     setIsLoading(true)
 
     signInWithEmailAndPassword(auth, email, password)
@@ -63,6 +88,18 @@ const Login = () => {
         toast.error(error.message)
       })
   }
+
+  useEffect(() => {
+    const arrErrors = Object.values(errors)
+    console.log(arrErrors)
+    if (arrErrors.length > 0) {
+      toast.error(arrErrors[0]?.message, {
+        pauseOnHover: false,
+        delay: 0,
+      })
+    }
+  }, [errors])
+
   return (
     <>
       {isLoading && <Loader />}
@@ -74,12 +111,13 @@ const Login = () => {
           {' '}
           <div className={styles.form}>
             <h2>Login</h2>
-            <form onSubmit={loginUser}>
+            <form onSubmit={handleSubmit(loginUser)}>
               <input
                 type="email"
                 placeholder="Email"
-                required
+                // required
                 value={email}
+                {...register('email')}
                 onChange={(e) => setEmail(e.target.value)}
               />
               <div className={styles.input}>
@@ -87,15 +125,20 @@ const Login = () => {
                 <input
                   type={passwordType}
                   placeholder="Password"
-                  required
                   value={password}
+                  {...register('password')}
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 {/* <IconBase /> */}
                 <i onClick={show}>{icon}</i>
               </div>
 
-              <button type="submit" className="--btn --btn-primary --btn-block">
+              <button
+                type="submit"
+                className="--btn --btn-primary --btn-block"
+                isLoading={isSubmitting}
+                disabled={isSubmitting}
+              >
                 Login
               </button>
               <div className={styles.links}>

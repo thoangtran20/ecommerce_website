@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './auth.module.scss'
 import resetImg from '../../assets/images/auths/reset-password.jpg'
 import Card from '../../components/card/Card'
@@ -8,12 +8,34 @@ import { auth } from '../../firebase/config'
 import { toast } from 'react-toastify'
 import Loader from '../../components/loader/Loader'
 
+import * as yup from 'yup'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .email('Please enter valid email address')
+    .required('Please enter your email address'),
+})
+
 const Reset = () => {
   const [email, setEmail] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid, isSubmitting },
+  } = useForm({
+    mode: 'onChange',
+    resolver: yupResolver(schema),
+  })
+
   const resetPassword = (e) => {
-    e.preventDefault()
+    // e.preventDefault()
+    if (!isValid) return
+
     setIsLoading(true)
 
     sendPasswordResetEmail(auth, email)
@@ -26,6 +48,17 @@ const Reset = () => {
         toast.error(error.message)
       })
   }
+
+  useEffect(() => {
+    const arrErrors = Object.values(errors)
+    console.log(arrErrors)
+    if (arrErrors.length > 0) {
+      toast.error(arrErrors[0]?.message, {
+        pauseOnHover: false,
+        delay: 0,
+      })
+    }
+  }, [errors])
   return (
     <>
       {isLoading && <Loader />}
@@ -37,15 +70,20 @@ const Reset = () => {
           {' '}
           <div className={styles.form}>
             <h2>Reset Password</h2>
-            <form onSubmit={resetPassword}>
+            <form onSubmit={handleSubmit(resetPassword)}>
               <input
                 type="text"
                 placeholder="Email"
-                required
                 value={email}
+                {...register('email')}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <button type="submit" className="--btn --btn-primary --btn-block">
+              <button
+                type="submit"
+                className="--btn --btn-primary --btn-block"
+                isLoading={isSubmitting}
+                disabled={isSubmitting}
+              >
                 Reset Password
               </button>
               <div className={styles.links}>
