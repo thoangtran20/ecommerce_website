@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Card from '../../components/card/Card'
 import registerImg from '../../assets/images/auths/register.png'
@@ -13,11 +13,22 @@ import Loader from '../../components/loader/Loader'
 
 const Register = () => {
   const [email, setEmail] = useState('')
+
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [passwordType, setPasswordType] = useState('password')
   const [confirmPasswordType, setConfirmPasswordType] = useState('password')
+
+  // const formik = useFormik({
+  //   initialValues: {
+  //     email: '',
+  //     password: '',
+  //     confirmPassword: '',
+  //   },
+  // })
+
+  // console.log(formik.values)
 
   const [icon, setIcon] = useState(EyeOff)
   console.log(icon)
@@ -40,6 +51,12 @@ const Register = () => {
 
   const registerUser = (e) => {
     e.preventDefault()
+    const newUser = {
+      email: email,
+      password: password,
+      confirmPassword: confirmPassword,
+    }
+    console.log(newUser)
     if (password !== confirmPassword) {
       toast.error('Passwords do not match!!!')
       return false
@@ -60,6 +77,8 @@ const Register = () => {
       })
     console.log(email, password, confirmPassword)
   }
+
+  useEffect(() => {})
   return (
     <>
       {isLoading && <Loader />}
@@ -72,16 +91,16 @@ const Register = () => {
               <input
                 type="email"
                 placeholder="Email"
-                required
                 value={email}
+                required
                 onChange={(e) => setEmail(e.target.value)}
               />
               <div className={styles.input}>
                 <input
                   type={passwordType}
                   placeholder="Password"
-                  required
                   value={password}
+                  required
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <i onClick={show}>{icon}</i>
@@ -91,8 +110,8 @@ const Register = () => {
                 <input
                   type={confirmPasswordType}
                   placeholder="Confirm Password"
-                  required
                   value={confirmPassword}
+                  required
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
                 <i onClick={showCPasword}>{icon}</i>

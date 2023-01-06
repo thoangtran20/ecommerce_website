@@ -15,9 +15,17 @@ import './Header.scss'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { ROUTERS } from '../../constants'
 import { Dropdown, Menu, Space } from 'antd'
-import { getAuth, signOut } from 'firebase/auth'
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
 import { auth } from '../../firebase/config'
 import { toast } from 'react-toastify'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  REMOVE_ACTIVE_USER,
+  selectIsLoggedIn,
+  selectUserID,
+  selectUserName,
+  SET_ACTIVE_USER,
+} from '../../stores/slice/authSlice'
 
 const Header = () => {
   const nav__links = [
@@ -98,6 +106,13 @@ const Header = () => {
   const menuRef = useRef(null)
   const headerRef = useRef(null)
 
+  const isLoggedIn = useSelector(selectIsLoggedIn)
+  console.log(isLoggedIn)
+
+  const dispatch = useDispatch()
+
+  const [displayName, setDisplayName] = useState('')
+
   const [visible, setVisible] = useState(false)
 
   const navigateToCart = () => {
@@ -109,6 +124,7 @@ const Header = () => {
   }
 
   const logoutUser = () => {
+    // e.preventDefault()
     signOut(auth)
       .then(() => {
         toast.success('Logout successfully!!!')
@@ -119,11 +135,40 @@ const Header = () => {
       })
   }
 
-  // useEffect(() => {
-  //   return !userInfo.data
-  //     ? setMenuList(unauthenticatedMenu)
-  //     : setMenuList(authenticatedMenu)
-  // }, [userInfo])
+  useEffect(() => {
+    return !isLoggedIn
+      ? setMenuList(unauthenticatedMenu)
+      : setMenuList(authenticatedMenu)
+  }, [dispatch, isLoggedIn])
+
+  // Monitor currently sign in user
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // console.log(user)
+        if (user.displayName === null) {
+          const uDevide = user.email.slice(0, -10)
+          console.log(uDevide)
+          const uName = uDevide.charAt(0).toUpperCase() + uDevide.slice(1)
+          console.log(uName)
+          setDisplayName(uName)
+        } else {
+          setDisplayName(user.displayName)
+        }
+
+        dispatch(
+          SET_ACTIVE_USER({
+            email: user.email,
+            userName: user.displayName ? user.displayName : displayName,
+            userID: user.uid,
+          }),
+        )
+      } else {
+        setDisplayName('')
+        dispatch(REMOVE_ACTIVE_USER())
+      }
+    })
+  }, [dispatch, displayName])
 
   const gotoLogin = () => {
     navigate('/login')
@@ -227,56 +272,31 @@ const Header = () => {
                 </i>
                 <span className="badge">2</span>
               </span>
-              <span>
-                <Space direction="vertical">
-                  <Space wrap>
-                    <p
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => {
-                        gotoLogin()
+              <Space direction="vertical">
+                <Space wrap>
+                  <Dropdown
+                    overlay={<Menu className="menu" items={menuList} />}
+                    placement="bottom"
+                  >
+                    <Button
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        color: 'black',
                       }}
                     >
-                      Login
-                    </p>
-                    <p
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => {
-                        logoutUser()
-                      }}
-                    >
-                      Logout
-                    </p>
-
-                    <motion.img
-                      whileTap={{ scale: 1.2 }}
-                      src={userIcon}
-                      alt=""
-                    />
-
-                    {/* <Dropdown
-                      overlay={<Menu items={menuList} />}
-                      placement="bottom"
-                    >
-                      <Button
-                        style={{
-                          fontSize: '30px',
-                          background: 'none',
-                          border: 'none',
-                          color: 'black',
-                        }}
-                      >
+                      <span>
                         <motion.img
                           whileTap={{ scale: 1.2 }}
                           src={userIcon}
                           alt=""
                         />
-                      </Button>
-                    </Dropdown> */}
-                  </Space>
+                        {isLoggedIn && <a href="#home">Hi, {displayName}</a>}
+                      </span>
+                    </Button>
+                  </Dropdown>
                 </Space>
-              </span>
+              </Space>
             </div>
 
             <div className="mobile__menu">

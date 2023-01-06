@@ -79,9 +79,30 @@
       img {
         width: 30px;
         height: 30px;
+        border: 2px solid var(--clr-grey-7);
+        border-radius: 50px;
         cursor: pointer;
       }
     }
+
+    a {
+      color: var(--clr-grey-3);
+      font-weight: 700;
+      margin-left: 5px;
+    }
+
+    a:hover {
+      color: var(--red-color);
+    }
+
+    // .menu {
+    //   a {
+    //     color: var(--clr-grey-5);
+    //   }
+    //   a:hover {
+    //     color: var(--red-color);
+    //   }
+    // }
 
     .cart__icon,
     .fav__icon {
