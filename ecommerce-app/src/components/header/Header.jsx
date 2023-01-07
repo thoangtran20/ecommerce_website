@@ -26,6 +26,7 @@ import {
   selectUserName,
   SET_ACTIVE_USER,
 } from '../../stores/slice/authSlice'
+import AdminOnlyRoute, { AdminOnlyLink } from '../adminOnlyRoute/AdminOnlyRoute'
 
 const Header = () => {
   const nav__links = [
@@ -220,6 +221,12 @@ const Header = () => {
                     </NavLink>
                   </li>
                 ))}
+                <AdminOnlyLink>
+                  <Link to="/admin/home">
+                    {' '}
+                    <button className="--btn --btn-primary">Admin</button>
+                  </Link>
+                </AdminOnlyLink>
                 <div className="nav__icons">
                   <span className="search__icon">
                     <i>

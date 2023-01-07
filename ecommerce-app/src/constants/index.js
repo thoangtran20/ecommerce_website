@@ -8,6 +8,7 @@ export const ROUTERS = {
   login: 'login',
   register: 'register',
   reset: 'reset',
+  admin: '/admin/*',
 }
 
 export const localStorageKey = {

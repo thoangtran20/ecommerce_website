@@ -12,6 +12,8 @@ import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
 import Reset from './pages/auth/Reset'
 import { ToastContainer } from 'react-toastify'
+import Admin from './pages/admin/Admin'
+import AdminOnlyRoute from './components/adminOnlyRoute/AdminOnlyRoute'
 
 function App() {
   return (
@@ -48,6 +50,20 @@ function App() {
             path={ROUTERS.reset}
             element={<CustomerLayout content={<Reset />} />}
           />
+          <Route
+            path={ROUTERS.admin}
+            element={
+              <AdminOnlyRoute>
+                <Admin />
+              </AdminOnlyRoute>
+            }
+          />
+
+          {/* <Route
+            path={ROUTERS.admin}
+            element={<AdminLayout />}
+            content={<Admin />}
+          /> */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
