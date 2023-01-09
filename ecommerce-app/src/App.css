@@ -34,7 +34,6 @@
 	--green-color: #6cbe02;
 	--red-color: #f90716;
 	--hero-bg: #d6e5fb;
-	--heading-fontSize: 2rem;
 	--small-text-color: #999;
 	--heading-text-color: #0a1d37;
 
@@ -110,13 +109,21 @@ p {
 	font-size: 1rem;
 }
 
-h1,
+h1 {
+	font-size: 4rem;
+}
 h2 {
-	font-size: var(--heading-fontSize);
+	font-size: 3rem;
+}
+h3 {
+	font-size: 2.5rem;
+}
+h4 {
+	font-size: 2rem;
 }
 
 ul {
-	list-style: none;
+	list-style-type: none;
 }
 
 a {
