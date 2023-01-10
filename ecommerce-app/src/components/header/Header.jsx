@@ -224,7 +224,7 @@ const Header = () => {
                 <AdminOnlyLink>
                   <Link to="/admin/home">
                     {' '}
-                    <button className="--btn --btn-primary">Admin</button>
+                    <button className="btn">Admin</button>
                   </Link>
                 </AdminOnlyLink>
                 <div className="nav__icons">

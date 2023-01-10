@@ -20,13 +20,18 @@
         // display: block;
         font-size: 1.2rem;
         font-weight: 300;
-        text-transform: capitalize;
         padding: 0.6rem;
         margin: 0.5rem auto;
         width: 100%;
         border: 1px solid #777;
         border-radius: 3px;
         outline: none;
+      }
+
+      input[placeholder='Product name'],
+      input[placeholder='Product brand'],
+      select {
+        text-transform: capitalize;
       }
 
       .progress {

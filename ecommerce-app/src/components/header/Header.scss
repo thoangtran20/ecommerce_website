@@ -67,6 +67,22 @@
     }
   }
 
+  .btn {
+    font-size: 1.2rem;
+    font-weight: 400;
+    padding: 6px 8px;
+    margin: 0 5px 0 0;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    cursor: pointer;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    // transition: all 0.3s;
+  }
+
   .nav__icons {
     display: flex;
     align-items: center;
