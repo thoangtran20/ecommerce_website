@@ -114,7 +114,7 @@ const AddProducts = () => {
     <>
       {isLoading && <Loader />}
       <div className={styles.product}>
-        <h1>Add New Products</h1>
+        <h2>Add New Products</h2>
         <Card cardClass={styles.card}>
           <Form onSubmit={addProduct}>
             <FormGroup>
