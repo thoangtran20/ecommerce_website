@@ -1,53 +1,90 @@
 import Card from '../../card/Card'
 import React, { useState } from 'react'
 import styles from './AddProducts.module.scss'
+
 import {
+  deleteObject,
   getDownloadURL,
   getStorage,
   ref,
-  uploadBytes,
   uploadBytesResumable,
 } from 'firebase/storage'
 
 import { Form, FormGroup, Input, Label } from 'reactstrap'
 import { toast } from 'react-toastify'
-import { addDoc, collection, Timestamp } from 'firebase/firestore'
+import { addDoc, collection, doc, setDoc, Timestamp } from 'firebase/firestore'
 import { db } from '../../../firebase/config'
-import { useNavigate } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import Loader from '../../loader/Loader'
+import { selectProducts } from '../../../stores/slice/productSlice'
+import { useSelector } from 'react-redux'
+
+const categories = [
+  { id: 1, name: 'T-Shirt' },
+  { id: 2, name: 'Skirt' },
+  { id: 3, name: 'Short' },
+  { id: 4, name: 'Jacket' },
+  { id: 5, name: 'Jean' },
+  { id: 6, name: 'Women-Shoes' },
+  { id: 7, name: 'Kid-Clothes' },
+  { id: 8, name: 'Men-Shoes' },
+]
+
+const initialState = {
+  name: '',
+  imgURL: '',
+  price: 0,
+  category: '',
+  brand: '',
+  description: '',
+  stock: 0,
+  avgRating: 0,
+}
 
 const AddProducts = () => {
   const storage = getStorage()
 
-  const categories = [
-    { id: 1, name: 'T-Shirt' },
-    { id: 2, name: 'Skirt' },
-    { id: 3, name: 'Short' },
-    { id: 4, name: 'Jacket' },
-    { id: 5, name: 'Jean' },
-    { id: 6, name: 'Women-Shoes' },
-    { id: 7, name: 'Kid-Clothes' },
-    { id: 8, name: 'Men-Shoes' },
-  ]
+  const { id } = useParams()
 
-  const initialState = {
-    name: '',
-    imgURL: '',
-    price: 0,
-    category: '',
-    brand: '',
-    description: '',
-    stock: 0,
-    avgRating: 0,
-  }
-  const [product, setProduct] = useState({
-    ...initialState,
+  const products = useSelector(selectProducts)
+  console.log(products)
+
+  const productEdit = products.find((item) => item.id === id)
+  console.log(productEdit)
+
+  // const [product, setProduct] = useState(() => {
+  //   const newState = detectForm(id, { ...initialState }, productEdit)
+  //   return newState
+  // })
+
+  const [product, setProduct] = useState(() => {
+    const newState = detectForm(id, { ...initialState }, productEdit)
+    console.log(newState)
+    return newState
   })
+
+  // const [product, setProduct] = useState({
+  //   ...initialState,
+  // })
 
   const [uploadProgress, setUploadProgress] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
 
   const navigate = useNavigate()
+
+  function detectForm(id, f1, f2) {
+    if (id === 'ADD') {
+      return f1
+    }
+    return f2
+  }
+
+  // const detectForm = (id, f1, f2) => {
+  //   if (id === 'ADD') {
+  //     return f1
+  //   }
+  //   return f2
+  // }
 
   const addProduct = (e) => {
     e.preventDefault()
@@ -71,6 +108,36 @@ const AddProducts = () => {
       setUploadProgress(0)
       setProduct({ ...initialState })
       toast.success('Product uploaded successfully!!!')
+      navigate('/admin/all-products')
+    } catch (error) {
+      setIsLoading(false)
+      toast.error(error.message)
+    }
+  }
+
+  const editProduct = async (e) => {
+    e.preventDefault()
+    setIsLoading(true)
+
+    if (product.imgURL !== productEdit.imgURL) {
+      const storageRef = ref(storage, productEdit.imgURL)
+      deleteObject(storageRef)
+    }
+    try {
+      setDoc(doc(db, 'products', id), {
+        name: product.name,
+        imgURL: product.imgURL,
+        price: Number(product.price),
+        category: product.category,
+        brand: product.brand,
+        description: product.description,
+        stock: Number(product.stock),
+        avgRating: Number(product.avgRating),
+        createdAt: productEdit.createdAt,
+        editedAt: Timestamp.now().toDate(),
+      })
+      setIsLoading(false)
+      toast.success('Product Edited Successfully')
       navigate('/admin/all-products')
     } catch (error) {
       setIsLoading(false)
@@ -115,9 +182,9 @@ const AddProducts = () => {
     <>
       {isLoading && <Loader />}
       <div className={styles.product}>
-        <h2>Add New Products</h2>
+        <h2>{detectForm(id, 'Add New Product', 'Edit Product')}</h2>
         <Card cardClass={styles.card}>
-          <Form onSubmit={addProduct}>
+          <Form onSubmit={detectForm(id, addProduct, editProduct)}>
             <FormGroup>
               <Label>Product name: </Label>
               <Input
@@ -237,7 +304,9 @@ const AddProducts = () => {
                 onChange={(e) => handleInputChange(e)}
               />
             </FormGroup>{' '}
-            <button className="--btn --btn-primary">Save Product</button>
+            <button className="--btn --btn-primary">
+              {detectForm(id, 'Save Product', 'Edit Product')}
+            </button>
           </Form>
 
           {/* <label></label>

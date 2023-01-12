@@ -1,7 +1,5 @@
 import React from 'react'
 import AdminOnlyRoute from '../../adminOnlyRoute/AdminOnlyRoute'
-import Footer from '../../footer/Footer'
-import Header from '../../header/Header'
 
 const AdminHome = () => {
   return (

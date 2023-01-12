@@ -16,10 +16,14 @@ import styles from './ViewProducts.module.scss'
 import Loader from '../../loader/Loader'
 import { deleteObject, ref } from 'firebase/storage'
 import Notiflix from 'notiflix'
+import { useDispatch } from 'react-redux'
+import { STORE_PRODUCTS } from '../../../stores/slice/productSlice'
 
 const ViewProducts = () => {
   const [products, setProducts] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     getProducts()
@@ -36,15 +40,20 @@ const ViewProducts = () => {
       const q = query(productsRef, orderBy('createdAt', 'desc'))
 
       onSnapshot(q, (snapshot) => {
-        console.log(snapshot)
-        console.log(snapshot.docs)
+        // console.log(snapshot)
+        // console.log(snapshot.docs)
         const allProducts = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }))
-        console.log(allProducts)
+        // console.log(allProducts)
         setProducts(allProducts)
         setIsLoading(false)
+        dispatch(
+          STORE_PRODUCTS({
+            products: allProducts,
+          }),
+        )
       })
     } catch (error) {
       setIsLoading(false)
@@ -117,7 +126,7 @@ const ViewProducts = () => {
                     <td>{category}</td>
                     <td>{`$${price}`}</td>
                     <td className={styles.icons}>
-                      <Link to="/admin/add-product">
+                      <Link to={`/admin/add-products/${id}`}>
                         <FaEdit size={20} color="#28a745" />
                       </Link>
                       &nbsp;

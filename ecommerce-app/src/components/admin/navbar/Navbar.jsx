@@ -24,12 +24,12 @@ const Navbar = () => {
             </NavLink>
           </ListGroupItem>
           <ListGroupItem>
-            <NavLink to="/admin/all-products" className={activeLink}>
+            <NavLink to="/admin/all-products/" className={activeLink}>
               All Products
             </NavLink>
           </ListGroupItem>
           <ListGroupItem>
-            <NavLink to="/admin/add-products" className={activeLink}>
+            <NavLink to="/admin/add-products/ADD" className={activeLink}>
               Add Products
             </NavLink>
           </ListGroupItem>
