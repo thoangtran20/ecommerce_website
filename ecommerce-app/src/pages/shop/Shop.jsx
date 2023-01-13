@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CommonSection from '../../components/common-section/CommonSection'
 // import styles from './Shop.scss'
 import './Shop.scss'
@@ -6,16 +6,33 @@ import Helmet from '../../components/helmet/Helmet'
 import ProductFilter from '../../components/productFilter/ProductFilter'
 import ProductList from '../productList/ProductList'
 import { Col, Container, Row } from 'reactstrap'
-import { products } from '../../data/ProductData'
+// import { products } from '../../data/ProductData'
 import ProductAction from '../../components/productAction/ProductAction'
 import Pagination from '../../components/pagination/Pagination'
 import { FaCogs } from 'react-icons/fa'
+import useFetchCollection from '../../customHooks/useFetchCollection'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectProducts, STORE_PRODUCTS } from '../../stores/slice/productSlice'
 
 const Shop = () => {
-  const [productsData, setProductsData] = useState(products)
+  // const [productsData, setProductsData] = useState(products)
   const [showFilter, setShowFilter] = useState(false)
 
-  console.log(productsData)
+  const { data, isLoading } = useFetchCollection('products')
+  const products = useSelector(selectProducts)
+  console.log(products)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(
+      STORE_PRODUCTS({
+        products: data,
+      }),
+    )
+  }, [dispatch, data])
+
+  // console.log(productsData)
   const toggleFilter = () => {
     setShowFilter(!showFilter)
   }
@@ -39,7 +56,7 @@ const Shop = () => {
 
               <Col lg="12">
                 <div className="contents">
-                  <ProductList data={productsData} />
+                  <ProductList products={products} />
                   <div className="icon" onClick={toggleFilter}>
                     <FaCogs size={20} color="orangered" />
                     <p>

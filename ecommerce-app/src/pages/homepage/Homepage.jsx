@@ -6,12 +6,29 @@ import Footer from '../../components/footer/Footer'
 import Header from '../../components/header/Header'
 import Slider from '../../components/slider/Slider'
 import ProductList from '../productList/ProductList'
-import { products } from '../../data/ProductData'
+// import { products } from '../../data/ProductData'
 import Helmet from '../../components/helmet/Helmet'
+import useFetchCollection from '../../customHooks/useFetchCollection'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectProducts, STORE_PRODUCTS } from '../../stores/slice/productSlice'
 
 const Homepage = () => {
   const [featuredProducts, setFeaturedProducts] = useState([])
   const [newArrivalProducts, setNewArrivalProducts] = useState([])
+
+  const { data, isLoading } = useFetchCollection('products')
+  const products = useSelector(selectProducts)
+  console.log(products)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(
+      STORE_PRODUCTS({
+        products: data,
+      }),
+    )
+  }, [dispatch, data])
 
   // useEffect(() => {
   //   const filterFeaturedProducts = products.filter(
@@ -35,7 +52,8 @@ const Homepage = () => {
                 <h2 className="section__title">Featured Products</h2>
                 <p>Summer Collection New Modern Design</p>
               </Col>
-              <ProductList data={products.slice(0, 6)} />
+              <ProductList products={products.slice(0, 6)} />
+              {/* <ProductList data={products.slice(0, 6)} /> */}
             </Row>
           </Container>
         </section>
@@ -59,7 +77,9 @@ const Homepage = () => {
                 <h2 className="section__title">New Arrivals</h2>
                 <p>Summer Collection New Modern Design</p>
               </Col>
-              <ProductList data={products.slice(12, 20)} />
+              <ProductList products={products.slice(12, 20)} />
+
+              {/* <ProductList data={products.slice(12, 20)} /> */}
             </Row>
           </Container>
         </section>

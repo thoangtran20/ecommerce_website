@@ -11,14 +11,14 @@ const ProductCard = ({ item }) => {
       <Col lg="3" md="4" className="mb-2">
         <div className="product__item">
           <div className="product__img">
-            <img src={item.imgUrl} alt="" />
+            <img src={item.imgURL} alt="" />
             <Link to={`/shop/${item.id}`} className="link">
               <RiSearchLine />
             </Link>
           </div>
           <div className="product__info p2">
             <span className="d-block">{item.brand}</span>
-            <h5>{item.productName}</h5>
+            <h5>{item.name}</h5>
             <div className="star">
               <i>
                 <RiStarFill />
