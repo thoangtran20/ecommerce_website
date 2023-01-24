@@ -6,13 +6,14 @@ import { BsFillCartPlusFill, BsFillSuitHeartFill } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 
 const ProductCard = ({ item }) => {
+  console.log(item)
   return (
     <>
       <Col lg="3" md="4" className="mb-2">
         <div className="product__item">
           <div className="product__img">
             <img src={item.imgURL} alt="" />
-            <Link to={`/shop/${item.id}`} className="link">
+            <Link to={`/product-detail/${item.id}`} className="link">
               <RiSearchLine />
             </Link>
           </div>

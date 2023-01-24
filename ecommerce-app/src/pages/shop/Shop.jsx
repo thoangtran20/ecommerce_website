@@ -13,6 +13,7 @@ import { FaCogs } from 'react-icons/fa'
 import useFetchCollection from '../../customHooks/useFetchCollection'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectProducts, STORE_PRODUCTS } from '../../stores/slice/productSlice'
+import spinnerImg from '../../assets/images/spinner.jpg'
 
 const Shop = () => {
   // const [productsData, setProductsData] = useState(products)
@@ -45,7 +46,7 @@ const Shop = () => {
             <Row>
               <Col lg="3">
                 <aside className="filter">
-                  <ProductFilter />
+                  {isLoading ? null : <ProductFilter />}
                 </aside>
               </Col>
               <Col lg="9">
@@ -56,7 +57,16 @@ const Shop = () => {
 
               <Col lg="12">
                 <div className="contents">
-                  <ProductList products={products} />
+                  {isLoading ? (
+                    <img
+                      src={spinnerImg}
+                      alt="Loading..."
+                      style={{ width: '50px' }}
+                      className="--center-all"
+                    />
+                  ) : (
+                    <ProductList products={products} />
+                  )}
                   <div className="icon" onClick={toggleFilter}>
                     <FaCogs size={20} color="orangered" />
                     <p>

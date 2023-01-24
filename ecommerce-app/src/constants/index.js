@@ -1,5 +1,5 @@
 export const ROUTERS = {
-  productDetail: '/shop/:id',
+  productDetail: '/product-detail/:id',
   productList: '/product-list',
   productCard: '/product-card',
   home: '/',

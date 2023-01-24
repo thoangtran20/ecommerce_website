@@ -16,6 +16,22 @@ const Homepage = () => {
   const [featuredProducts, setFeaturedProducts] = useState([])
   const [newArrivalProducts, setNewArrivalProducts] = useState([])
 
+  const url = window.location.href
+
+  const scrollToProducts = () => {
+    if (url.includes('#products')) {
+      window.scrollTo({
+        top: 700,
+        behavior: 'smooth',
+      })
+      return
+    }
+  }
+
+  useEffect(() => {
+    scrollToProducts()
+  }, [])
+
   const { data, isLoading } = useFetchCollection('products')
   const products = useSelector(selectProducts)
   console.log(products)

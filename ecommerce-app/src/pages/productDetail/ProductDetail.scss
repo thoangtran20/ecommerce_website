@@ -1,108 +1,118 @@
-.product__detail {
-  display: flex;
-  margin-top: 20px;
-  margin-bottom: 50px;
-  .single__image {
-    // width: 40%;
-    margin-left: 50px;
+.product1 {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
 
-    img {
-      width: 100%;
-      object-fit: cover;
-    }
-
-    .small__img--group {
-      display: flex;
-      justify-content: space-between;
-
-      .small__img--col {
-        flex-basis: 24%;
-        cursor: pointer;
-      }
-    }
+  h2 {
+    font-size: 1.5rem;
   }
+  .product__detail {
+    display: flex;
+    padding-top: 2rem;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    .single__image {
+      // width: 40%;
+      margin-left: 50px;
 
-  .single__detail {
-    padding-top: 30px;
-    margin-left: 20px;
-    h6 {
-      font-family: 'Josefin Sans', sans-serif;
-    }
-    h4 {
-      padding: 40px 0 20px 0;
-      font-family: 'Josefin Sans', sans-serif;
-      font-weight: 700;
-    }
-    h2 {
-      // font-size: 24px;
-      margin-bottom: 10px;
-      font-family: 'Josefin Sans', sans-serif;
-    }
-    .product__rating {
-      .star {
-        margin-bottom: 5px;
+      img {
+        width: 100%;
+        object-fit: cover;
+      }
 
-        span i {
-          color: #fd841f;
+      .small__img--group {
+        display: flex;
+        justify-content: space-between;
+
+        .small__img--col {
+          flex-basis: 24%;
+          cursor: pointer;
         }
       }
-      p span {
-        color: #fd841f;
-        font-weight: 500;
-      }
     }
-    .info {
-      text-transform: capitalize;
-      width: 300px;
-      font-family: 'Josefin Sans', sans-serif;
-      color: var(--primary-color);
-      display: grid;
-      margin-bottom: 15px;
-      grid-template-columns: 125px 1fr;
-      span {
+
+    .single__detail {
+      padding-top: 30px;
+      margin-left: 20px;
+      h6 {
+        font-family: 'Josefin Sans', sans-serif;
+      }
+      h4 {
+        padding: 40px 0 20px 0;
+        font-family: 'Josefin Sans', sans-serif;
         font-weight: 700;
       }
-    }
-    select {
-      display: block;
-      padding: 5px 10px;
-      margin-bottom: 10px;
+      h2 {
+        // font-size: 24px;
+        margin-bottom: 10px;
+        font-family: 'Josefin Sans', sans-serif;
+      }
+      .product__rating {
+        .star {
+          margin-bottom: 5px;
+
+          span i {
+            color: #fd841f;
+          }
+        }
+        p span {
+          color: #fd841f;
+          font-weight: 500;
+        }
+      }
+      .info {
+        text-transform: capitalize;
+        width: 300px;
+        font-family: 'Josefin Sans', sans-serif;
+        color: var(--primary-color);
+        display: grid;
+        margin-bottom: 15px;
+        grid-template-columns: 125px 1fr;
+        span {
+          font-weight: 700;
+        }
+      }
+      select {
+        display: block;
+        padding: 5px 10px;
+        margin-bottom: 10px;
+      }
+
+      span {
+        line-height: 25px;
+      }
+      input {
+        width: 50px;
+        height: 47px;
+        padding-left: 10px;
+        font-size: 16px;
+        margin-right: 10px;
+      }
+      input:focus {
+        outline: none;
+      }
+      button {
+        background-color: #088178;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 20px 40px;
+        color: #fff;
+        background-color: #088178;
+        border-radius: 5px;
+        cursor: pointer;
+        border: none;
+        outline: none;
+        transition: 0.2s;
+      }
     }
 
-    span {
-      line-height: 25px;
-    }
-    input {
-      width: 50px;
-      height: 47px;
-      padding-left: 10px;
-      font-size: 16px;
-      margin-right: 10px;
-    }
-    input:focus {
-      outline: none;
-    }
-    button {
-      background-color: #088178;
-      color: #fff;
-      font-size: 14px;
+    .related__title {
+      font-size: 1.2rem;
+      margin-left: 20px;
       font-weight: 600;
-      padding: 20px 40px;
-      color: #fff;
-      background-color: #088178;
-      border-radius: 5px;
-      cursor: pointer;
-      border: none;
-      outline: none;
-      transition: 0.2s;
+      margin-top: 30px;
+      font-family: 'Josefin Sans', sans-serif;
     }
-  }
-
-  .related__title {
-    font-size: 1.2rem;
-    margin-left: 20px;
-    font-weight: 600;
-    margin-top: 30px;
-    font-family: 'Josefin Sans', sans-serif;
   }
 }

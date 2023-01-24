@@ -1,15 +1,33 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { BsFillGridFill } from 'react-icons/bs'
 import { FaListAlt } from 'react-icons/fa'
+import { useDispatch, useSelector } from 'react-redux'
 import { Pagination } from 'reactstrap'
+import {
+  FILTER_BY_SEARCH,
+  selectFilteredProducts,
+} from '../../stores/slice/filterSlice'
+import { selectProducts } from '../../stores/slice/productSlice'
 import Search from '../search/Search'
 import './ProductAction.scss'
 
 const ProductAction = () => {
   const [grid, setGrid] = useState(true)
+  const products = useSelector(selectProducts)
+  console.log(products)
+
   const [sort, setSort] = useState('latest')
-  const [search, setSearch] = useState()
+  const [search, setSearch] = useState('')
+
+  const dispatch = useDispatch()
+
+  const filteredProducts = useSelector(selectFilteredProducts)
+  console.log(filteredProducts)
+
+  useEffect(() => {
+    dispatch(FILTER_BY_SEARCH({ products, search }))
+  }, [dispatch, products, search])
 
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1)
@@ -35,7 +53,7 @@ const ProductAction = () => {
             />
 
             <p>
-              <b>{}</b> Produts are found
+              <b>{filteredProducts.length}</b> Produts are found
             </p>
             {/* Search Icon */}
           </div>

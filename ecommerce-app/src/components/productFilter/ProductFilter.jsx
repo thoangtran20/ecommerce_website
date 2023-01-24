@@ -1,12 +1,12 @@
 import React from 'react'
 import { useState } from 'react'
-import { products } from '../../data/ProductData'
+// import { products } from '../../data/ProductData'
 import ProductList from '../../pages/productList/ProductList'
 import './ProductFilter.scss'
 
 const ProductFilter = () => {
-  const [productsData, setProductsData] = useState(products)
-  console.log(productsData)
+  // const [productsData, setProductsData] = useState(products)
+  // console.log(productsData)
 
   return (
     <div className="product__filter">
