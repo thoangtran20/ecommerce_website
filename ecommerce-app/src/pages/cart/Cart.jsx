@@ -85,10 +85,10 @@ const Cart = () => {
                           <td>{index + 1}</td>
                           <td>
                             <p>
-                              <b>{item.productName}</b>
+                              <b>{item.name}</b>
                             </p>
                             <img
-                              src={item.imgUrl}
+                              src={item.imgURL}
                               alt=""
                               style={{ width: '100px' }}
                             />
