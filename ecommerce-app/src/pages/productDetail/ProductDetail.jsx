@@ -66,12 +66,7 @@ const ProductDetail = () => {
   // ComponentDidMount - ComponmentDidMount
   useEffect(() => {
     getProduct()
-    // handleDetail(product)
   }, [id])
-
-  // useEffect(() => {
-  //   handleDetail(product)
-  // }, [product])
 
   const dispatch = useDispatch()
 
@@ -96,8 +91,6 @@ const ProductDetail = () => {
 
     const relatedProducts = data.filter((item) => item.category === category)
     console.log(relatedProducts)
-
-    // const products = products
 
     const increase = () => {
       setAmount((oldAmount) => {

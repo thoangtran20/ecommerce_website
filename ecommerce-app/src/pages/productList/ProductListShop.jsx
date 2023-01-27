@@ -1,8 +1,13 @@
 import React from 'react'
 import './ProductList.scss'
 import ProductCard from '../productCard/ProductCard'
+import { useSelector } from 'react-redux'
+import { selectFilteredProducts } from '../../stores/slice/filterSlice'
 
-const ProductList = ({ products }) => {
+const ProductListShop = ({ products }) => {
+  const filteredProducts = useSelector(selectFilteredProducts)
+  console.log(filteredProducts)
+
   return (
     <div className="product__container">
       {products.length === 0 ? (
@@ -10,7 +15,7 @@ const ProductList = ({ products }) => {
       ) : (
         <>
           {' '}
-          {products?.map((item, index) => (
+          {filteredProducts?.map((item, index) => (
             <ProductCard item={item} key={index} />
           ))}
         </>
@@ -19,4 +24,4 @@ const ProductList = ({ products }) => {
   )
 }
 
-export default ProductList
+export default ProductListShop

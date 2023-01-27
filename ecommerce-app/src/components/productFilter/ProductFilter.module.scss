@@ -1,4 +1,4 @@
-.product__filter {
+.filter {
   h4 {
     margin-top: 1rem;
   }
@@ -27,12 +27,22 @@
   }
 }
 
-@media screen and (max-width: 799px) {
+@media only screen and (max-width: 799px) {
   .filter {
     .category button {
       width: 100%;
     }
     .brand {
+      select {
+        width: 100%;
+      }
+    }
+    .colors {
+      select {
+        width: 100%;
+      }
+    }
+    .size {
       select {
         width: 100%;
       }

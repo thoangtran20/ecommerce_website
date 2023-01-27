@@ -1,4 +1,4 @@
-.product {
+.products {
   display: flex;
   position: relative;
 
@@ -25,7 +25,7 @@
 }
 
 @media only screen and (max-width: 699px) {
-  .product {
+  .products {
     .filter {
       width: 50%;
       background-color: #fff;
@@ -35,6 +35,9 @@
       height: 100%;
       padding: 1rem;
       z-index: 99;
+    }
+    .show {
+      left: 0;
     }
     .contents {
       width: 100%;

@@ -7,6 +7,7 @@ import { Pagination } from 'reactstrap'
 import {
   FILTER_BY_SEARCH,
   selectFilteredProducts,
+  SORT_PRODUCTS,
 } from '../../stores/slice/filterSlice'
 import { selectProducts } from '../../stores/slice/productSlice'
 import Search from '../search/Search'
@@ -28,6 +29,10 @@ const ProductAction = () => {
   useEffect(() => {
     dispatch(FILTER_BY_SEARCH({ products, search }))
   }, [dispatch, products, search])
+
+  useEffect(() => {
+    dispatch(SORT_PRODUCTS({ products, sort }))
+  }, [dispatch, products, sort])
 
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1)
@@ -66,7 +71,12 @@ const ProductAction = () => {
           {/* Sort Product */}
           <div className="sort">
             <label>Sort by:</label>
-            <select name="" id="" value="">
+            <select
+              name=""
+              id=""
+              value={sort}
+              onChange={(e) => setSort(e.target.value)}
+            >
               <option value="latest">Latest Product</option>
               <option value="lowest-price" key="">
                 Lowest Price
