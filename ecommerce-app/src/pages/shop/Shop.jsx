@@ -16,16 +16,20 @@ import {
 import spinnerImg from '../../assets/images/spinner.jpg'
 import ProductListShop from '../productList/ProductListShop'
 import ProductFilter from '../../components/productFilter/ProductFilter'
+import { selectFilteredProducts } from '../../stores/slice/filterSlice'
 
 const Shop = () => {
   const [showFilter, setShowFilter] = useState(false)
-  console.log(showFilter)
+  // console.log(showFilter)
 
   const { data, isLoading } = useFetchCollection('products')
   const products = useSelector(selectProducts)
-  console.log(products)
 
   const dispatch = useDispatch()
+
+  const filteredProducts = useSelector(selectFilteredProducts)
+
+  // console.log(products)
 
   useEffect(() => {
     dispatch(
@@ -40,7 +44,6 @@ const Shop = () => {
     )
   }, [dispatch, data])
 
-  // console.log(productsData)
   const toggleFilter = () => {
     setShowFilter(!showFilter)
   }
@@ -88,7 +91,7 @@ const Shop = () => {
                   </div>
                 </div>
 
-                <Pagination />
+                {/* <Pagination /> */}
               </Col>
             </Row>
           </Container>

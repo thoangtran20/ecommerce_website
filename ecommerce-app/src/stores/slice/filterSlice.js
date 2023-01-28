@@ -75,6 +75,45 @@ const filterSlice = createSlice({
 
       state.filteredProducts = tempProducts
     },
+    FILTER_BY_SIZE(state, action) {
+      const { products, size } = action.payload
+      // console.log(products)
+      // console.log(size)
+
+      // const allSizes = new Set([...products.map((product) => product.size)])
+      // console.log(allSizes)
+
+      // const arr = Array.from(allSizes)
+      // console.log(arr)
+
+      // const arr = Array.from(allSizes)
+      // console.log(arr)
+
+      let tempProducts = []
+      if (size === 'All') {
+        tempProducts = products
+      } else {
+        tempProducts = products.filter((product) => product.size.includes(size))
+        console.log(tempProducts)
+      }
+      state.filteredProducts = tempProducts
+    },
+    FILTER_BY_COLOR(state, action) {
+      const { products, color } = action.payload
+      console.log(products)
+      console.log(color)
+
+      let tempProducts = []
+      if (color === 'All') {
+        tempProducts = products
+      } else {
+        tempProducts = products.filter((product) =>
+          product.colors.includes(color),
+        )
+        console.log(tempProducts)
+      }
+      state.filteredProducts = tempProducts
+    },
   },
 })
 
@@ -84,6 +123,8 @@ export const {
   FILTER_BY_CATEGORY,
   FILTER_BY_BRAND,
   FILTER_BY_PRICE,
+  FILTER_BY_SIZE,
+  FILTER_BY_COLOR,
 } = filterSlice.actions
 
 export const selectFilteredProducts = (state) => state.filter.filteredProducts

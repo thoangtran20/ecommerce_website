@@ -3,12 +3,10 @@ import { Col } from 'reactstrap'
 import './ProductCard.scss'
 import { RiSearchLine, RiStarFill } from 'react-icons/ri'
 import { BsFillCartPlusFill, BsFillSuitHeartFill } from 'react-icons/bs'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const ProductCard = ({ item }) => {
-  console.log(item)
-
-  const navigate = useNavigate()
+  // console.log(item)
 
   return (
     <>

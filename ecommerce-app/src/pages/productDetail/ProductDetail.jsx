@@ -19,6 +19,7 @@ import {
   RiStarHalfSFill,
   RiStarSFill,
 } from 'react-icons/ri'
+import { FaCheck } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectProducts, STORE_PRODUCTS } from '../../stores/slice/productSlice'
 import useFetchCollection from '../../customHooks/useFetchCollection'
@@ -36,7 +37,11 @@ const ProductDetail = () => {
   const { id } = useParams()
 
   const [product, setProduct] = useState(null)
+  console.log(product)
+
   const [amount, setAmount] = useState(1)
+  const [size, setSize] = useState()
+  const [mainColor, setMainColor] = useState()
 
   const getProduct = async () => {
     const docRef = doc(db, 'products', id)
@@ -59,10 +64,6 @@ const ProductDetail = () => {
 
   const navigate = useNavigate()
 
-  const handleDetail = (item) => {
-    navigate(`/product-detail/${item.id}`, { state: { ...item } })
-  }
-
   // ComponentDidMount - ComponmentDidMount
   useEffect(() => {
     getProduct()
@@ -82,6 +83,8 @@ const ProductDetail = () => {
       name,
       price,
       brand,
+      size,
+      colors,
       category,
       description,
       stock,
@@ -90,7 +93,7 @@ const ProductDetail = () => {
     } = product
 
     const relatedProducts = data.filter((item) => item.category === category)
-    console.log(relatedProducts)
+    // console.log(relatedProducts)
 
     const increase = () => {
       setAmount((oldAmount) => {
@@ -120,7 +123,11 @@ const ProductDetail = () => {
       toast.success('Product added successfully')
     }
 
-    console.log(name)
+    // console.log(size)
+
+    console.log(colors)
+
+    // console.log(name)
 
     return (
       <Helmet title={name}>
@@ -227,13 +234,41 @@ const ProductDetail = () => {
                     {brand}
                   </p>
                   <h2>${price}</h2>
-                  <select name="" id="">
-                    <option value="">Select Size</option>
-                    <option value="">M</option>
-                    <option value="">L</option>
-                    <option value="">XL</option>
-                    <option value="">XXL</option>
+                  <select
+                    name="size"
+                    id=""
+                    onChange={(e) => setSize(e.target.value)}
+                  >
+                    <option value={size}>Select Size</option>
+                    {size.map((item, index) => {
+                      return (
+                        <option value={item} key={index}>
+                          {item}
+                        </option>
+                      )
+                    })}
                   </select>
+                  <div className="colors">
+                    <span> colors : </span>
+                    <div>
+                      {colors.map((color, index) => {
+                        return (
+                          <button
+                            key={index}
+                            style={{ background: color }}
+                            className={`${
+                              mainColor === color
+                                ? 'color-btn active'
+                                : 'color-btn'
+                            }`}
+                            onClick={() => setMainColor(color)}
+                          >
+                            {mainColor === color ? <FaCheck /> : null}
+                          </button>
+                        )
+                      })}
+                    </div>
+                  </div>
                   <h4>Product Details</h4>
                   <span>{description}</span>
                   {/* <input type="number" value="1" /> */}

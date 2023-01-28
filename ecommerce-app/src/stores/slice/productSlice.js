@@ -11,7 +11,7 @@ const productSlice = createSlice({
   initialState,
   reducers: {
     STORE_PRODUCTS(state, action) {
-      console.log(action.payload)
+      // console.log(action.payload)
       state.products = action.payload.products
     },
     GET_PRICE_RANGE(state, action) {
@@ -21,10 +21,10 @@ const productSlice = createSlice({
         const price = product.price
         return array.push(price)
       })
-      console.log(array)
+      // console.log(array)
       const maxPrice = Math.max(...array)
       const minPrice = Math.min(...array)
-      console.log(maxPrice, minPrice)
+      // console.log(maxPrice, minPrice)
 
       state.minPrice = minPrice
       state.maxPrice = maxPrice

@@ -90,6 +90,44 @@
       margin-bottom: 10px;
     }
 
+    .colors {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      align-items: center;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      span {
+        text-transform: capitalize;
+        font-weight: 700;
+        font-family: 'Josefin Sans', sans-serif;
+      }
+      div {
+        display: flex;
+      }
+    }
+
+    .color-btn {
+      display: inline-block;
+      // width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      background: #222;
+      margin-right: 0.5rem;
+      border: 1px solid #666;
+      cursor: pointer;
+      opacity: 0.5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      svg {
+        font-size: 0.75rem;
+        color: var(--color-white);
+      }
+    }
+    .active {
+      opacity: 1;
+    }
+
     span {
       line-height: 25px;
     }
@@ -125,5 +163,15 @@
     font-weight: 600;
     margin-top: 30px;
     font-family: 'Josefin Sans', sans-serif;
+  }
+}
+
+@media only screen and (max-width: 699px) {
+  .product__detail {
+    .single__detail {
+      .colors {
+        display: block;
+      }
+    }
   }
 }

@@ -16,7 +16,7 @@ import './ProductAction.scss'
 const ProductAction = () => {
   const [grid, setGrid] = useState(true)
   const products = useSelector(selectProducts)
-  console.log(products)
+  // console.log(products)
 
   const [sort, setSort] = useState('latest')
   const [search, setSearch] = useState('')
@@ -24,7 +24,7 @@ const ProductAction = () => {
   const dispatch = useDispatch()
 
   const filteredProducts = useSelector(selectFilteredProducts)
-  console.log(filteredProducts)
+  // console.log(filteredProducts)
 
   useEffect(() => {
     dispatch(FILTER_BY_SEARCH({ products, search }))
@@ -34,11 +34,7 @@ const ProductAction = () => {
     dispatch(SORT_PRODUCTS({ products, sort }))
   }, [dispatch, products, sort])
 
-  // Pagination states
-  const [currentPage, setCurrentPage] = useState(1)
-  const [productsPerPage, setProductsPerPage] = useState(1)
 
-  // Get Current Products
   return (
     <>
       {' '}
