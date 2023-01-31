@@ -1,0 +1,54 @@
+.checkout {
+  // width: 100%;
+  // position: relative;
+
+  .card {
+    width: 100%;
+    max-width: 500px;
+    margin-right: 30px;
+    padding: 1rem;
+    h3 {
+      font-weight: 300;
+    }
+  }
+
+  form {
+    font-family: 'Josefin Sans', sans-serif;
+
+    label {
+      font-size: 1.4rem;
+      font-weight: 500;
+      text-transform: capitalize;
+    }
+
+    // label {
+    //   display: block;
+    //   font-size: 1.4rem;
+    //   font-weight: 500;
+    // }
+
+    input[type='text'],
+    .select {
+      // display: block;
+      font-size: 1.1rem;
+      font-weight: 400;
+      padding: 0.6rem;
+      margin: 0.5rem auto;
+      width: 100%;
+      border: 1px solid #777;
+      border-radius: 3px;
+      outline: none;
+    }
+  }
+}
+
+@media screen and (max-width: 699px) {
+  .checkout {
+    form {
+      flex-direction: column;
+      div {
+        width: 100%;
+      }
+    }
+  }
+}

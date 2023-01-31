@@ -29,10 +29,13 @@ const productSlice = createSlice({
       state.minPrice = minPrice
       state.maxPrice = maxPrice
     },
+    REMOVE(state, action) {
+      state.products = []
+    },
   },
 })
 
-export const { STORE_PRODUCTS, GET_PRICE_RANGE } = productSlice.actions
+export const { STORE_PRODUCTS, GET_PRICE_RANGE, REMOVE } = productSlice.actions
 
 export const selectProducts = (state) => state.product.products
 export const selectMinPrice = (state) => state.product.minPrice

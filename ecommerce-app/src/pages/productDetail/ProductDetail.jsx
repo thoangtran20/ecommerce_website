@@ -21,14 +21,19 @@ import {
 } from 'react-icons/ri'
 import { FaCheck } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectProducts, STORE_PRODUCTS } from '../../stores/slice/productSlice'
+import {
+  REMOVE,
+  selectProducts,
+  STORE_PRODUCTS,
+} from '../../stores/slice/productSlice'
 import useFetchCollection from '../../customHooks/useFetchCollection'
 import AmountButton from '../../components/amount-button/AmountButton'
-import { cartActions } from '../../stores/slice/cartSlice'
+import { cartActions, selectCartItems } from '../../stores/slice/cartSlice'
 import { toast } from 'react-toastify'
 import ProductList from '../productList/ProductList'
+import { ROUTERS } from '../../constants'
 
-const ProductDetail = () => {
+const ProductDetail = (props) => {
   // Lấy id sản phẩm
   // const obj = useParams()
   // const id = obj.id{
@@ -40,8 +45,8 @@ const ProductDetail = () => {
   console.log(product)
 
   const [amount, setAmount] = useState(1)
-  const [size, setSize] = useState()
-  const [mainColor, setMainColor] = useState()
+  const [mainSize, setMainSize] = useState(undefined)
+  const [mainColor, setMainColor] = useState(undefined)
 
   const getProduct = async () => {
     const docRef = doc(db, 'products', id)
@@ -63,6 +68,27 @@ const ProductDetail = () => {
   console.log(data)
 
   const navigate = useNavigate()
+
+  const check = () => {
+    if (mainSize === undefined) {
+      alert('Please choose the size!')
+      return false
+    }
+    if (mainColor === undefined) {
+      alert('Please choose the color!')
+      return false
+    }
+
+    return true
+  }
+
+  // const cartItems = useSelector(selectCartItems)
+  // const isCartAdded = cartItems.findIndex((cart) => {
+  //   return cart.id === id
+  // })
+
+  // const [previewImg, setPreviewImg] = useState(img1)
+  // setPreviewImg(img1)
 
   // ComponentDidMount - ComponmentDidMount
   useEffect(() => {
@@ -116,11 +142,30 @@ const ProductDetail = () => {
     }
 
     const addToCart = () => {
-      const cartItem = { sku, imgURL: img1, name, price, amount }
-      console.log(cartItem)
-      dispatch(cartActions.ADD_TO_CART(cartItem))
+      if (check()) {
+        const cartItem = {
+          sku,
+          imgURL: img1,
+          name,
+          price,
+          cartQuantity: amount,
+          size: mainSize,
+          color: mainColor,
+        }
+        console.log(cartItem)
+        dispatch(cartActions.ADD_TO_CART(cartItem))
 
-      toast.success('Product added successfully')
+        toast.success('Product added successfully')
+      } else {
+        toast.error('Fail!!! Please try again!')
+      }
+    }
+
+    const goToCart = () => {
+      if (check()) {
+        addToCart()
+        navigate(ROUTERS.cart)
+      }
     }
 
     // console.log(size)
@@ -237,9 +282,9 @@ const ProductDetail = () => {
                   <select
                     name="size"
                     id=""
-                    onChange={(e) => setSize(e.target.value)}
+                    onChange={(e) => setMainSize(e.target.value)}
                   >
-                    <option value={size}>Select Size</option>
+                    <option value={mainSize}>Select Size</option>
                     {size.map((item, index) => {
                       return (
                         <option value={item} key={index}>
@@ -272,6 +317,7 @@ const ProductDetail = () => {
                   <h4>Product Details</h4>
                   <span>{description}</span>
                   {/* <input type="number" value="1" /> */}
+
                   {stock > 0 && (
                     <AmountButton
                       amount={amount}
@@ -280,7 +326,9 @@ const ProductDetail = () => {
                     />
                   )}
                   {stock > 0 && (
-                    <button onClick={addToCart}>Add To Cart</button>
+                    <div>
+                      <button onClick={goToCart}>Add To Cart</button>
+                    </div>
                   )}
                 </div>
               </Col>

@@ -14,6 +14,9 @@ import Reset from './pages/auth/Reset'
 import { ToastContainer } from 'react-toastify'
 import AdminOnlyRoute from './components/adminOnlyRoute/AdminOnlyRoute'
 import Admin from './pages/admin/Admin'
+import Checkout from './pages/checkout/Checkout'
+import WishList from './pages/wishList/WishList'
+import CheckoutDetail from './pages/checkout/CheckoutDetail'
 
 function App() {
   return (
@@ -37,6 +40,18 @@ function App() {
           <Route
             path={ROUTERS.cart}
             element={<CustomerLayout content={<Cart />} />}
+          />
+          <Route
+            path={ROUTERS.wishList}
+            element={<CustomerLayout content={<WishList />} />}
+          />
+          <Route
+            path={ROUTERS.checkout}
+            element={<CustomerLayout content={<Checkout />} />}
+          />
+          <Route
+            path={ROUTERS.checkoutDetails}
+            element={<CustomerLayout content={<CheckoutDetail />} />}
           />
           <Route
             path={ROUTERS.login}

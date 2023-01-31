@@ -7,6 +7,7 @@ const initialState = {
     : [],
   cartTotalQuantity: 0,
   cartTotalAmount: 0,
+  previousURL: '',
 }
 
 const cartSlice = createSlice({
@@ -14,55 +15,47 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     ADD_TO_CART(state, action) {
-      const newItem = action.payload
-      console.log(newItem.sku)
-      const existingItem = state.cartItems.find(
-        (item) => item.sku === newItem.sku,
+      const productItem = action.payload
+      console.log(productItem)
+      const productIndex = state.cartItems.findIndex(
+        (item) =>
+          item.sku === productItem.sku &&
+          item.size === productItem.size &&
+          item.color === productItem.color,
       )
 
-      state.totalQuantity++
-      console.log(newItem.amount)
+      // console.log(state.cartItems[productIndex].cartQuantity)
 
-      if (!existingItem) {
-        state.cartItems.push({
-          sku: newItem.sku,
-          name: newItem.name,
-          imgURL: newItem.imgURL,
-          price: newItem.price,
-          cartQuantity: newItem.amount,
-          totalPrice: newItem.price,
-          totalQuantity: newItem.amount,
+      if (productIndex >= 0) {
+        // Item already exists in the cart
+        // Increase the cartQuantity
+        state.cartItems[productIndex].cartQuantity += 1
+        toast.info(`${productItem.name} increased by one`, {
+          position: 'top-left',
         })
       } else {
-        // existingItem.cartQuantity =
-        //   Number(existingItem.cartQuantity) + Number(newItem.amount)
-        console.log(existingItem.cartQuantity)
-        let quantity = (existingItem.cartQuantity += 1)
-        console.log(quantity)
-        console.log(newItem.amount)
-        const totalQuantity = quantity + newItem.amount
-        console.log(totalQuantity)
-        existingItem.totalPrice =
-          Number(existingItem.totalPrice) + Number(newItem.price)
-
-        toast.info('Increased product quantity', {
-          position: 'bottom-left',
+        // Item doesn't exists in the cart
+        // Add item to the cart
+        const tempProduct = {
+          ...productItem,
+          cartQuantity: productItem.cartQuantity,
+        }
+        state.cartItems.push(tempProduct)
+        toast.success(`${productItem.name} added to cart`, {
+          position: 'top-left',
         })
       }
-
-      // state.totalAmount = state.cartItem.reduce(
-      //   (total, item) => total + Number(item.price) * Number(item.quantity),
-      //   0,
-      // )
-
-      // console.log(state.totalQuantity)
-      console.log(state.cartItems)
-
+      // save cart to LS
       localStorage.setItem('cartItemKey', JSON.stringify(state.cartItems))
     },
     DECREASE_CART(state, action) {
+      const productItem = action.payload
+      console.log(productItem)
       const itemIndex = state.cartItems.findIndex(
-        (item) => item.sku === action.payload.sku,
+        (item) =>
+          item.sku === productItem.sku &&
+          item.size === productItem.size &&
+          item.color === productItem.color,
       )
 
       console.log(state.cartItems[itemIndex].cartQuantity)
@@ -81,15 +74,6 @@ const cartSlice = createSlice({
         )
         state.cartItems = nextCartItem
 
-        // state.totalAmount = state.cartItem.reduce(
-        //   (total, item) => total + Number(item.price) * Number(item.quantity),
-        //   0,
-        // )
-
-        // state.cartItem[itemIndex].totalPrice =
-        //   Number(state.cartItem[itemIndex].totalPrice) +
-        //   Number(state.cartItem[itemIndex].price)
-
         toast.error('Product removed from cart', {
           position: 'bottom-left',
         })
@@ -97,12 +81,17 @@ const cartSlice = createSlice({
       localStorage.setItem('cartItemKey', JSON.stringify(state.cartItems))
     },
     REMOVE_FROM_CART(state, action) {
+      const productItem = action.payload
+      console.log(productItem)
       const newCartItem = state.cartItems.filter(
-        (item) => item.sku !== action.payload.sku,
+        (item) =>
+          item.sku !== productItem.sku ||
+          item.size !== productItem.size ||
+          item.color !== productItem.color,
       )
 
       state.cartItems = newCartItem
-      toast.success(`${action.payload.name} removed from cart`, {
+      toast.success(`${productItem.name} removed from cart`, {
         position: 'top-left',
       })
 
@@ -137,10 +126,14 @@ const cartSlice = createSlice({
     },
     CLEAR_CART(state, action) {
       state.cartItems = []
-      toast.info(`Cart cleared`, {
+      toast.info(`Cart cleared!!!`, {
         position: 'top-left',
       })
       localStorage.setItem('cartItemKey', JSON.stringify(state.cartItems))
+    },
+    SAVE_URL(state, action) {
+      console.log(action.payload)
+      state.previousURL = action.payload
     },
   },
 })
@@ -150,5 +143,6 @@ export const cartActions = cartSlice.actions
 export const selectCartItems = (state) => state.cart.cartItems
 export const selectCartTotalQuantity = (state) => state.cart.cartTotalQuantity
 export const selectCartTotalAmount = (state) => state.cart.cartTotalAmount
+export const selectPreviousURL = (state) => state.cart.previousURL
 
 export const cartReducer = cartSlice.reducer

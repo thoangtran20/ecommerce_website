@@ -1,0 +1,29 @@
+.card {
+  width: 100%;
+  max-width: 500px;
+  padding: 1rem;
+  border: 1px solid var(--light-blue);
+  text-transform: capitalize;
+  margin-bottom: 5px;
+
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+    background-position: 5%;
+    background-repeat: no-repeat;
+  }
+}
+h3 {
+  font-weight: 300;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  h3 {
+    color: var(--color-danger);
+  }
+}

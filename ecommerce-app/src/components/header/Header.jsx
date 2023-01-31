@@ -27,6 +27,11 @@ import {
   SET_ACTIVE_USER,
 } from '../../stores/slice/authSlice'
 import AdminOnlyRoute, { AdminOnlyLink } from '../adminOnlyRoute/AdminOnlyRoute'
+import {
+  cartActions,
+  selectCartTotalQuantity,
+} from '../../stores/slice/cartSlice'
+import Notiflix from 'notiflix'
 
 const Header = () => {
   const nav__links = [
@@ -51,6 +56,28 @@ const Header = () => {
       display: 'Blog',
     },
   ]
+
+  const confirmLogout = () => {
+    Notiflix.Confirm.show(
+      'Logout!!!',
+      'You are about to logout user',
+      'Logout',
+      'Cancel',
+      function okCb() {
+        logoutUser()
+      },
+      function cancelCb() {
+        console.log('Logout Canceled')
+      },
+      {
+        width: '320px',
+        borderRadius: '4px',
+        titleColor: 'orangered',
+        okButtonBackground: 'orangered',
+        cssAnimationStyle: 'zoom',
+      },
+    )
+  }
 
   const [menuList, setMenuList] = useState([])
 
@@ -95,7 +122,7 @@ const Header = () => {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => {
-            logoutUser()
+            confirmLogout()
           }}
         >
           Logout
@@ -114,6 +141,10 @@ const Header = () => {
 
   const [displayName, setDisplayName] = useState('')
 
+  const cartTotalQuantity = useSelector(selectCartTotalQuantity)
+
+  console.log(cartTotalQuantity)
+
   const [visible, setVisible] = useState(false)
 
   const navigateToCart = () => {
@@ -126,6 +157,7 @@ const Header = () => {
 
   const logoutUser = () => {
     // e.preventDefault()
+    dispatch(cartActions.CLEAR_CART())
     signOut(auth)
       .then(() => {
         toast.success('Logout successfully!!!')
@@ -135,6 +167,10 @@ const Header = () => {
         toast.error(error.message)
       })
   }
+
+  useEffect(() => {
+    dispatch(cartActions.CALCULATE_TOTAL_QUANTITY())
+  }, [])
 
   useEffect(() => {
     return !isLoggedIn
@@ -243,7 +279,7 @@ const Header = () => {
                     <i>
                       <RiShoppingBagLine />
                     </i>
-                    <span className="badge"></span>
+                    <span className="badge">{cartTotalQuantity}</span>
                   </span>
                   <span>
                     <motion.img
@@ -277,7 +313,7 @@ const Header = () => {
                 <i>
                   <RiShoppingBagLine />
                 </i>
-                <span className="badge">2</span>
+                <span className="badge">{cartTotalQuantity}</span>
               </span>
               <Space direction="vertical">
                 <Space wrap>

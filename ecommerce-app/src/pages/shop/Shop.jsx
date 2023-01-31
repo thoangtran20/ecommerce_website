@@ -29,6 +29,22 @@ const Shop = () => {
 
   const filteredProducts = useSelector(selectFilteredProducts)
 
+  const url = window.location.href
+
+  const scrollToProducts = () => {
+    if (url.includes('#products')) {
+      window.scrollTo({
+        top: 700,
+        behavior: 'smooth',
+      })
+      return
+    }
+  }
+
+  useEffect(() => {
+    scrollToProducts()
+  }, [])
+
   // console.log(products)
 
   useEffect(() => {
@@ -68,31 +84,28 @@ const Shop = () => {
               <Col lg="9">
                 <aside className={styles.actions}>
                   <ProductAction />
+                  <div className={styles.contents}>
+                    {isLoading ? (
+                      <img
+                        src={spinnerImg}
+                        alt="Loading..."
+                        style={{ width: '50px' }}
+                        className="--center-all"
+                      />
+                    ) : (
+                      <ProductListShop products={products} />
+                    )}
+                    <div className={styles.icon} onClick={toggleFilter}>
+                      <FaCogs size={20} color="orangered" />
+                      <p>
+                        <b>{showFilter ? 'Hide Filter' : 'Show Filter'}</b>
+                      </p>
+                    </div>
+                  </div>
                 </aside>
               </Col>
 
-              <Col lg="12">
-                <div className={styles.contents}>
-                  {isLoading ? (
-                    <img
-                      src={spinnerImg}
-                      alt="Loading..."
-                      style={{ width: '50px' }}
-                      className="--center-all"
-                    />
-                  ) : (
-                    <ProductListShop products={products} />
-                  )}
-                  <div className={styles.icon} onClick={toggleFilter}>
-                    <FaCogs size={20} color="orangered" />
-                    <p>
-                      <b>{showFilter ? 'Hide Filter' : 'Show Filter'}</b>
-                    </p>
-                  </div>
-                </div>
-
-                {/* <Pagination /> */}
-              </Col>
+              <Col lg="12">{/* <Pagination /> */}</Col>
             </Row>
           </Container>
         </div>

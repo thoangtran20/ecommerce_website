@@ -84,17 +84,36 @@ section {
     border-top: 1px solid rgb(187, 187, 187);
     padding-top: 2rem;
 
-    .clear__btn {
-      width: 130px;
-      height: 40px;
-      border-radius: 5px;
-      font-weight: 400;
-      letter-spacing: 1.15px;
-      border: 0.5px solid rgb(177, 177, 177);
-      color: gray;
-      background: none;
-      outline: none;
-      cursor: pointer;
+    .cart__button {
+      display: flex;
+      flex-direction: column;
+
+      .back__btn {
+        width: 100px;
+        margin-top: 15px;
+        height: 40px;
+        border-radius: 5px;
+        font-weight: 400;
+        letter-spacing: 1.15px;
+        border: 0.5px solid rgb(177, 177, 177);
+        color: var(--color-white);
+        background: var(--green-color);
+        outline: none;
+        cursor: pointer;
+      }
+
+      .clear__btn {
+        width: 130px;
+        height: 40px;
+        border-radius: 5px;
+        font-weight: 400;
+        letter-spacing: 1.15px;
+        border: 0.5px solid rgb(177, 177, 177);
+        color: gray;
+        background: none;
+        outline: none;
+        cursor: pointer;
+      }
     }
 
     .cart__checkout {

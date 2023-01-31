@@ -18,6 +18,9 @@ import Loader from '../../components/loader/Loader'
 import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useSelector } from 'react-redux'
+import { selectPreviousURL } from '../../stores/slice/cartSlice'
+import { ROUTERS } from '../../constants'
 
 const schema = yup.object().shape({
   email: yup
@@ -38,6 +41,8 @@ const Login = () => {
   const [icon, setIcon] = useState(EyeOff)
   const navigate = useNavigate()
 
+  const previousURL = useSelector(selectPreviousURL)
+
   const {
     register,
     handleSubmit,
@@ -56,6 +61,13 @@ const Login = () => {
     icon === Eye ? setIcon(EyeOff) : setIcon(Eye)
   }
 
+  const redirectUser = () => {
+    if (previousURL.includes('cart')) {
+      return navigate(ROUTERS.cart)
+    }
+    navigate(ROUTERS.home)
+  }
+
   const loginUser = (e) => {
     // e.preventDefault()
     if (!isValid) return
@@ -67,7 +79,7 @@ const Login = () => {
         // const user = userCredential.user
         setIsLoading(false)
         toast.success('Login Successful!!!')
-        navigate('/')
+        redirectUser()
       })
       .catch((error) => {
         setIsLoading(false)
@@ -80,9 +92,9 @@ const Login = () => {
   const signInWithGoogle = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
-        const user = result.user
+        // const user = result.user
         toast.success('Login Successfully')
-        navigate('/')
+        redirectUser()
       })
       .catch((error) => {
         toast.error(error.message)
