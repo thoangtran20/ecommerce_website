@@ -108,7 +108,7 @@ const Header = () => {
     {
       key: '3',
       label: (
-        <NavLink to={'/order-list/confirm'}>
+        <NavLink to={'/order-history'}>
           <p target="_blank" rel="noopener noreferrer">
             Order History
           </p>

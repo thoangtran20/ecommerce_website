@@ -14,7 +14,7 @@ import { useEffect } from 'react'
 const CheckoutSummary = () => {
   const cartItems = useSelector(selectCartItems)
   const cartTotalAmount = useSelector(selectCartTotalAmount)
-  console.log(cartTotalAmount)
+  // console.log(cartTotalAmount)
   const cartTotalQuantity = useSelector(selectCartTotalQuantity)
 
   const dispatch = useDispatch()
@@ -61,7 +61,7 @@ const CheckoutSummary = () => {
                   size: size,
                   color: color,
                 }
-                console.log(product)
+                // console.log(product)
                 return (
                   <Card key={id} cardClass={styles.card}>
                     <h4>

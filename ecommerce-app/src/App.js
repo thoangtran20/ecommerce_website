@@ -17,6 +17,9 @@ import Admin from './pages/admin/Admin'
 import Checkout from './pages/checkout/Checkout'
 import WishList from './pages/wishList/WishList'
 import CheckoutDetail from './pages/checkout/CheckoutDetail'
+import CheckoutSuccess from './pages/checkout/CheckoutSuccess'
+import OrderHistory from './pages/orderHistory/OrderHistory'
+import OrderDetail from './pages/orderDetail/OrderDetail'
 
 function App() {
   return (
@@ -52,6 +55,18 @@ function App() {
           <Route
             path={ROUTERS.checkoutDetails}
             element={<CustomerLayout content={<CheckoutDetail />} />}
+          />
+          <Route
+            path={ROUTERS.checkoutSuccess}
+            element={<CustomerLayout content={<CheckoutSuccess />} />}
+          />
+          <Route
+            path={ROUTERS.orderHistory}
+            element={<CustomerLayout content={<OrderHistory />} />}
+          />
+          <Route
+            path={ROUTERS.orderDetail}
+            element={<CustomerLayout content={<OrderDetail />} />}
           />
           <Route
             path={ROUTERS.login}

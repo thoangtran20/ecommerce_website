@@ -1,0 +1,55 @@
+.checkout {
+  width: 100%;
+  position: relative;
+  margin-top: 10px;
+  h2 {
+    font-weight: 600;
+    margin-top: 10px;
+    font-size: 40px;
+    font-family: 'Poppins', sans-serif;
+  }
+  p {
+    font-weight: 300;
+    margin-top: 20px;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  button {
+    margin-top: 20px;
+    background: #5469d4;
+    font-family: 'Poppins', sans-serif;
+    color: var(--color-white);
+    border-radius: 5px;
+    border: 0;
+    padding: 12px 16px;
+    text-transform: capitalize;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: block;
+    transition: all 0.2s ease;
+    box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
+    position: relative;
+  }
+
+  button:hover {
+    filter: contrast(115%);
+  }
+
+  button:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+}
+
+@media screen and (max-width: 699px) {
+  .checkout {
+    form {
+      flex-direction: column;
+      div {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -21,6 +21,12 @@
       text-transform: capitalize;
     }
 
+    .errors {
+      color: var(--red-color);
+      font-size: 16px;
+      font-weight: 600;
+    }
+
     // label {
     //   display: block;
     //   font-size: 1.4rem;

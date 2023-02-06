@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { Col, Container, Form, FormGroup, Input, Label, Row } from 'reactstrap'
-import {
-  CountryDropdown,
-} from 'react-country-region-selector'
+import { CountryDropdown } from 'react-country-region-selector'
 import Card from '../../components/card/Card'
 import styles from './CheckoutDetail.module.scss'
+import * as yup from 'yup'
+
 import { useDispatch } from 'react-redux'
 import { SAVE_SHIPPING_ADDRESS } from '../../stores/slice/checkoutSlice'
 import { useNavigate } from 'react-router'
@@ -13,6 +13,10 @@ import { ROUTERS } from '../../constants'
 import Helmet from '../../components/helmet/Helmet'
 import CommonSection from '../../components/common-section/CommonSection'
 import CheckoutSummary from '../../components/checkout-summary/CheckoutSummary'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { toast } from 'react-toastify'
+import { notification } from 'antd'
 
 const initialAddressState = {
   name: '',
@@ -23,26 +27,126 @@ const initialAddressState = {
   phone: '',
 }
 
+const schema = yup.object().shape({
+  name: yup.string().required('Please enter your recipient name'),
+  address: yup.string().required('Please enter your address'),
+  city: yup.string().required('Please enter your city'),
+  postal_code: yup.string().required('Please enter your poster code'),
+  country: yup.string().required('Country is required'),
+  phone: yup
+    .string()
+    .required('Please enter your phone')
+    .matches(
+      /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/,
+    ),
+})
+
 const CheckoutDetail = () => {
   const [shippingAddress, setShippingAddress] = useState({
     ...initialAddressState,
   })
 
+  console.log(shippingAddress)
+
+  // const name = shippingAddress.name
+  // console.log(name)
+
+  // const address = shippingAddress.address
+  // console.log(address)
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid, isSubmitting },
+    reset,
+  } = useForm({
+    mode: 'onChange',
+    resolver: yupResolver(schema),
+  })
+
+  // console.log(errors)
+
+  // console.log(Object.values(errors))
+
   const dispatch = useDispatch()
 
   const navigate = useNavigate()
 
-  const handleShipping = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target
     setShippingAddress({ ...shippingAddress, [name]: value })
   }
 
-  const handleSubmit = (e) => {
+  // console.log(shippingAddress)
+
+  const submitCheckout = (e) => {
     e.preventDefault()
-    console.log(shippingAddress)
     dispatch(SAVE_SHIPPING_ADDRESS(shippingAddress))
     navigate(ROUTERS.checkout)
+    // if (
+    //   !shippingAddress.name ||
+    //   !shippingAddress.address ||
+    //   !shippingAddress.city ||
+    //   !shippingAddress.postal_code ||
+    //   !shippingAddress.country ||
+    //   !shippingAddress.phone
+    // ) {
+    //   return notification.error({
+    //     message: `Please enter full information!!!`,
+    //   })
+    // }
+
+    // if (!isValid) return
+    // console.log(data)
+    // console.log('asdfasdfaf')
+
+    // return new Promise((resolve) => {
+    //   setTimeout(() => {
+    //     console.log(data)
+    //     reset({
+    //       name: '',
+    //       address: '',
+    //       city: '',
+    //       postal_code: '',
+    //       country: '',
+    //       phone: '',
+    //     })
+    //     console.log(shippingAddress)
+    //     dispatch(SAVE_SHIPPING_ADDRESS(shippingAddress))
+    //     navigate(ROUTERS.checkout)
+    //   }, 3000)
+    // })
+
+    // const formData = {
+    //   name: shippingAddress.name,
+    //   address: shippingAddress.address,
+    //   city: shippingAddress.city,
+    //   postal_code: shippingAddress.postal_code,
+    //   country: shippingAddress.country,
+    //   phone: shippingAddress.phone,
+    // }
+
+    // console.log(formData)
+
+    // console.log(shippingAddress)
+    // dispatch(SAVE_SHIPPING_ADDRESS(shippingAddress))
+    // navigate(ROUTERS.checkout)
   }
+
+  // const onSubmit = (data) => {
+  //   console.log({ data })
+  // }
+
+  // useEffect(() => {
+  //   const arrErrors = Object.values(errors)
+  //   console.log(arrErrors)
+  //   if (arrErrors.length > 0) {
+  //     toast.error(arrErrors[0]?.message, {
+  //       pauseOnHover: false,
+  //       delay: 0,
+  //     })
+  //   }
+  // }, [errors])
 
   return (
     <Helmet title="checkout">
@@ -51,7 +155,8 @@ const CheckoutDetail = () => {
       <section>
         <div className={`wrapper ${styles.checkout}`}>
           <h2>Checkout Details</h2>
-          <Form onSubmit={handleSubmit}>
+          {/* <Form onSubmit={handleSubmit(submitCheckout)}> */}
+          <Form onSubmit={submitCheckout}>
             <Container>
               <Row>
                 <Col lg="7">
@@ -65,9 +170,13 @@ const CheckoutDetail = () => {
                         placeholder="Recipient Name"
                         name="name"
                         value={shippingAddress.name}
-                        onChange={(e) => handleShipping(e)}
+                        // ref={register}
                         required
+                        // {...register('name')}
+                        onChange={handleChange}
                       />
+
+                      {/* <p className={styles.errors}> {errors.name?.message} </p> */}
                     </FormGroup>
 
                     <FormGroup>
@@ -78,8 +187,13 @@ const CheckoutDetail = () => {
                         required
                         name="address"
                         value={shippingAddress.address}
-                        onChange={(e) => handleShipping(e)}
+                        // {...register('address')}
+                        onChange={handleChange}
                       />
+                      {/* <p className={styles.errors}>
+                        {' '}
+                        {errors.address?.message}{' '}
+                      </p> */}
                     </FormGroup>
 
                     <FormGroup>
@@ -90,8 +204,10 @@ const CheckoutDetail = () => {
                         required
                         name="city"
                         value={shippingAddress.city}
-                        onChange={(e) => handleShipping(e)}
+                        // {...register('city')}
+                        onChange={handleChange}
                       />
+                      {/* <p className={styles.errors}> {errors.city?.message} </p> */}
                     </FormGroup>
 
                     <FormGroup>
@@ -102,8 +218,13 @@ const CheckoutDetail = () => {
                         required
                         name="postal_code"
                         value={shippingAddress.postal_code}
-                        onChange={(e) => handleShipping(e)}
+                        // {...register('postal_code')}
+                        onChange={handleChange}
                       />
+                      {/* <p className={styles.errors}>
+                        {' '}
+                        {errors.postal_code?.message}{' '}
+                      </p> */}
                     </FormGroup>
 
                     {/* Country Input */}
@@ -111,10 +232,12 @@ const CheckoutDetail = () => {
                       <Label>Country</Label>
                       <CountryDropdown
                         valueType="short"
+                        required
                         className={styles.select}
                         value={shippingAddress.country}
+                        // {...register('country')}
                         onChange={(val) =>
-                          handleShipping({
+                          handleChange({
                             target: {
                               name: 'country',
                               value: val,
@@ -122,6 +245,10 @@ const CheckoutDetail = () => {
                           })
                         }
                       />
+                      {/* <p className={styles.errors}>
+                        {' '}
+                        {errors.country?.message}{' '}
+                      </p> */}
                     </FormGroup>
 
                     <FormGroup>
@@ -132,11 +259,18 @@ const CheckoutDetail = () => {
                         required
                         name="phone"
                         value={shippingAddress.phone}
-                        onChange={(e) => handleShipping(e)}
+                        // {...register('phone')}
+                        onChange={handleChange}
                       />
+                      {/* <p className={styles.errors}> {errors.phone?.message} </p> */}
                     </FormGroup>
 
-                    <button type="submit" className="--btn --btn-primary">
+                    <button
+                      type="submit"
+                      className="--btn --btn-primary"
+                      isLoading={isSubmitting}
+                      disabled={isSubmitting}
+                    >
                       Proceed To Checkout
                     </button>
                   </Card>
