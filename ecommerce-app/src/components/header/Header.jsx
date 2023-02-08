@@ -281,13 +281,32 @@ const Header = () => {
                     </i>
                     <span className="badge">{cartTotalQuantity}</span>
                   </span>
-                  <span>
-                    <motion.img
-                      whileTap={{ scale: 1.2 }}
-                      src={userIcon}
-                      alt=""
-                    />
-                  </span>
+
+                  <Space direction="vertical">
+                    <Space wrap>
+                      <Dropdown
+                        overlay={<Menu className="menu" items={menuList} />}
+                        placement="bottom"
+                      >
+                        <Button
+                          style={{
+                            background: 'none',
+                            border: 'none',
+                            color: 'black',
+                          }}
+                        >
+                          <span>
+                            <motion.img
+                              whileTap={{ scale: 1.2 }}
+                              src={userIcon}
+                              alt=""
+                            />
+                            {isLoggedIn && <a href="#home"></a>}
+                          </span>
+                        </Button>
+                      </Dropdown>
+                    </Space>
+                  </Space>
                 </div>
                 <span className="close" onClick={menuToggle}>
                   <i>

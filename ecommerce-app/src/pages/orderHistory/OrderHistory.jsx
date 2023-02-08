@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
-import { Col, Container, Row } from 'reactstrap'
+import { Col, Container, Row, Table } from 'reactstrap'
 import Loader from '../../components/loader/Loader'
 import useFetchCollection from '../../customHooks/useFetchCollection'
 import { selectUserID } from '../../stores/slice/authSlice'
@@ -27,6 +27,7 @@ const OrderHistory = () => {
   }
 
   const filteredOrders = orders.filter((order) => order.userID === userID)
+  console.log(filteredOrders)
 
   return (
     <section>
@@ -46,7 +47,7 @@ const OrderHistory = () => {
                   {filteredOrders.length === 0 ? (
                     <p>No order found</p>
                   ) : (
-                    <table>
+                    <Table>
                       <thead>
                         <tr>
                           <th>s/n</th>
@@ -91,7 +92,7 @@ const OrderHistory = () => {
                           )
                         })}
                       </tbody>
-                    </table>
+                    </Table>
                   )}
                 </div>
               </>

@@ -9,6 +9,7 @@ const orderSlice = createSlice({
   initialState,
   reducers: {
     STORE_ORDERS(state, action) {
+      console.log(action.payload)
       state.orderHistory = action.payload
     },
   },

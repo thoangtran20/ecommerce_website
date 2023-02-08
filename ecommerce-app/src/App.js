@@ -20,6 +20,7 @@ import CheckoutDetail from './pages/checkout/CheckoutDetail'
 import CheckoutSuccess from './pages/checkout/CheckoutSuccess'
 import OrderHistory from './pages/orderHistory/OrderHistory'
 import OrderDetail from './pages/orderDetail/OrderDetail'
+import ReviewProducts from './components/reviewProducts/ReviewProducts'
 
 function App() {
   return (
@@ -67,6 +68,10 @@ function App() {
           <Route
             path={ROUTERS.orderDetail}
             element={<CustomerLayout content={<OrderDetail />} />}
+          />
+          <Route
+            path={ROUTERS.reviewProduct}
+            element={<CustomerLayout content={<ReviewProducts />} />}
           />
           <Route
             path={ROUTERS.login}

@@ -24,6 +24,7 @@
     "react-router": "^6.6.1",
     "react-router-dom": "^6.6.1",
     "react-scripts": "5.0.1",
+    "react-star-rate": "^0.2.0",
     "react-toastify": "^9.1.1",
     "reactstrap": "^9.1.5",
     "redux": "^4.2.0",

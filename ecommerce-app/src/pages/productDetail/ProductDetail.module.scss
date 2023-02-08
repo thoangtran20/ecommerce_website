@@ -30,11 +30,11 @@
       object-fit: cover;
     }
 
-    .small__img--group {
+    .small__imgGroup {
       display: flex;
       justify-content: space-between;
 
-      .small__img--col {
+      .small__imgCol {
         flex-basis: 24%;
         cursor: pointer;
       }
@@ -104,28 +104,27 @@
       div {
         display: flex;
       }
-    }
-
-    .color-btn {
-      display: inline-block;
-      // width: 1rem;
-      height: 1rem;
-      border-radius: 50%;
-      background: #222;
-      margin-right: 0.5rem;
-      border: 1px solid #666;
-      cursor: pointer;
-      opacity: 0.5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      svg {
-        font-size: 0.75rem;
-        color: var(--color-white);
+      button {
+        display: inline-block;
+        // width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        background-color: #222;
+        margin-right: 0.5rem;
+        border: 1px solid #666;
+        cursor: pointer;
+        opacity: 0.5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        svg {
+          font-size: 0.75rem;
+          color: var(--color-white);
+        }
       }
-    }
-    .active {
-      opacity: 1;
+      .active {
+        opacity: 1;
+      }
     }
 
     span {
@@ -163,6 +162,26 @@
     font-weight: 600;
     margin-top: 30px;
     font-family: 'Josefin Sans', sans-serif;
+  }
+}
+
+.review {
+  // font-size: 1.2rem;
+  margin-left: 1rem;
+
+  font-weight: 600;
+  margin-top: 30px;
+
+  .reviewed__title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 30px;
+    font-family: 'Josefin Sans', sans-serif;
+  }
+  .card {
+    padding: 2rem;
+    margin-top: 20px;
+    margin-bottom: 50px;
   }
 }
 

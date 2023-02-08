@@ -6,7 +6,7 @@ import {
   selectCartTotalAmount,
   selectCartTotalQuantity,
 } from '../../stores/slice/cartSlice'
-import { Col, Container, Row } from 'reactstrap'
+import { Col, Container, Row, Table } from 'reactstrap'
 import './Cart.scss'
 import CommonSection from '../../components/common-section/CommonSection'
 import Helmet from '../../components/helmet/Helmet'
@@ -128,7 +128,7 @@ const Cart = () => {
                   </div>
                 </>
               ) : (
-                <table className="table borded">
+                <Table className="table borded">
                   <thead>
                     <tr>
                       <th>STT</th>
@@ -186,7 +186,7 @@ const Cart = () => {
                       )
                     })}
                   </tbody>
-                </table>
+                </Table>
               )}
             </Col>
 

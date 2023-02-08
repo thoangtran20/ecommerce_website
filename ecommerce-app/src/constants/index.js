@@ -11,6 +11,7 @@ export const ROUTERS = {
   checkoutSuccess: '/checkout-success',
   orderHistory: '/order-history',
   orderDetail: '/order-detail/:id',
+  reviewProduct: '/review-product/:id',
   login: 'login',
   register: 'register',
   reset: 'reset',

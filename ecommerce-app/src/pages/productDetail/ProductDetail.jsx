@@ -9,10 +9,11 @@ import { useNavigate, useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 import { Col, Container, Row } from 'reactstrap'
 import CommonSection from '../../components/common-section/CommonSection'
+import styles from './ProductDetail.module.scss'
 import Helmet from '../../components/helmet/Helmet'
+import Card from '../../components/card/Card'
 import spinnerImg from '../../assets/images/spinner.jpg'
 import { db } from '../../firebase/config'
-import './ProductDetail.scss'
 import {
   RiStackFill,
   RiStarHalfFill,
@@ -32,12 +33,10 @@ import { cartActions, selectCartItems } from '../../stores/slice/cartSlice'
 import { toast } from 'react-toastify'
 import ProductList from '../productList/ProductList'
 import { ROUTERS } from '../../constants'
+import useFetchDocument from '../../customHooks/useFetchDocument'
+import StarsRating from 'react-star-rate'
 
 const ProductDetail = (props) => {
-  // Lấy id sản phẩm
-  // const obj = useParams()
-  // const id = obj.id{
-
   // Lay id tu object
   const { id } = useParams()
 
@@ -47,6 +46,12 @@ const ProductDetail = (props) => {
   const [amount, setAmount] = useState(1)
   const [mainSize, setMainSize] = useState(undefined)
   const [mainColor, setMainColor] = useState(undefined)
+
+  const { document } = useFetchDocument('products', id)
+  console.log(document)
+
+  // const { documentReview } = useFetchDocument('reviews', id)
+  // console.log(documentReview)
 
   const getProduct = async () => {
     const docRef = doc(db, 'products', id)
@@ -59,13 +64,13 @@ const ProductDetail = (props) => {
       }
       setProduct(product)
     } else {
-      // doc.data() will be undefined in this case
-      console.log('No such document!')
+      console.log('Product not found')
     }
   }
 
-  const { data } = useFetchCollection('products')
-  console.log(data)
+  // const getProduct = () => {
+  //   setProduct(document)
+  // }
 
   const navigate = useNavigate()
 
@@ -82,6 +87,20 @@ const ProductDetail = (props) => {
     return true
   }
 
+  // const activeLink = ({ isActive }) => (isActive ? `${styles.active}` : '')
+
+  const { data } = useFetchCollection('products')
+  console.log(data)
+
+  const { data1 } = useFetchCollection('reviews')
+  console.log(data1)
+
+  const products = useSelector(selectProducts)
+  console.log(products)
+
+  const filteredReviews = data1.filter((review) => review.productID === id)
+  console.log(filteredReviews)
+
   // const cartItems = useSelector(selectCartItems)
   // const isCartAdded = cartItems.findIndex((cart) => {
   //   return cart.id === id
@@ -90,10 +109,19 @@ const ProductDetail = (props) => {
   // const [previewImg, setPreviewImg] = useState(img1)
   // setPreviewImg(img1)
 
-  // ComponentDidMount - ComponmentDidMount
+  // ComponentDidMount - ComponmentDidUpdate
+
   useEffect(() => {
     getProduct()
   }, [id])
+
+  useEffect(() => {
+    setProduct(document)
+  }, [document])
+
+  // useEffect(() => {
+  //   dispatch(STORE_REVIEWS(reviewsData))
+  // }, [dispatch, reviewsData])
 
   const dispatch = useDispatch()
 
@@ -119,7 +147,7 @@ const ProductDetail = (props) => {
     } = product
 
     const relatedProducts = data.filter((item) => item.category === category)
-    // console.log(relatedProducts)
+    console.log(relatedProducts)
 
     const increase = () => {
       setAmount((oldAmount) => {
@@ -167,17 +195,11 @@ const ProductDetail = (props) => {
         navigate(ROUTERS.cart)
       }
     }
-
-    // console.log(size)
-
-    console.log(colors)
-
-    // console.log(name)
-
+    // console.log(colors)
     return (
       <Helmet title={name}>
         <CommonSection title={name} />
-        <section className="product1">
+        <section className={styles.product1}>
           <Container>
             <Row>
               <Col lg="12">
@@ -189,52 +211,57 @@ const ProductDetail = (props) => {
             </Row>
           </Container>
         </section>
-        <section className="product__detail">
+        <section className={styles.product__detail}>
           <Container>
             <Row>
               <Col lg="5">
-                <div className="single__image">
-                  <img src={img1} className="main__img" alt={name} />
-                  <div className="small__img--group">
+                <div className={styles.single__image}>
+                  <img src={img1} className={styles.main__img} alt={name} />
+                  <div className={styles.small__imgGroup}>
                     <div
-                      className="small__img--col"
+                      className={styles.small__imgCol}
                       // onClick={() => setPreviewImg(img1)}
                     >
-                      <img src={img1} className="small__img" alt="" />
+                      <img src={img1} className={styles.small__img} alt="" />
                     </div>
                     <div
-                      className="small__img--col"
+                      className={styles.small__imgCol}
                       // onClick={() => setPreviewImg(img1)}
                     >
-                      <img src={img1} className="small__img" alt="" />
+                      <img src={img1} className={styles.small__img} alt="" />
                     </div>
                     <div
-                      className="small__img--col"
+                      className={styles.small__imgCol}
                       // onClick={() => setPreviewImg(img1)}
                     >
-                      <img src={img1} className="small__img" alt="" />
+                      <img src={img1} className={styles.small__img} alt="" />
                     </div>
                     <div
-                      className="small__img--col"
+                      className={styles.small__imgCol}
                       // onClick={() => setPreviewImg(img1)}
                     >
-                      <img src={img1} className="small__img" alt="" />
+                      <img src={img1} className={styles.small__img} alt="" />
                     </div>
                     <div
-                      className="small__img--col"
+                      className={styles.small__imgCol}
                       // onClick={() => setPreviewImg(img1)}
                     >
-                      <img src={img1} className="small__img" alt="" />
+                      <img src={img1} className={styles.small__img} alt="" />
                     </div>
                   </div>
                 </div>
               </Col>
               <Col lg="7">
-                <div className="single__detail">
+                <div className={styles.single__detail}>
                   <h6>Home / {category}</h6>
                   <h4>{name}</h4>
-                  <div className="product__rating d-flex align-items-center gap-5 mb-3">
-                    <div className="star">
+                  <div
+                    className={`${styles.product__rating} d-flex
+                    align-items-center
+                    gap-5
+                    mb-3`}
+                  >
+                    <div className={styles.star}>
                       <span>
                         <i>
                           <RiStarSFill />
@@ -266,15 +293,15 @@ const ProductDetail = (props) => {
                       (<span>{avgRating}</span> ratings)
                     </p>
                   </div>
-                  <p className="info">
+                  <p className={styles.info}>
                     <span>Available : </span>{' '}
                     {stock > 0 ? 'In stock' : 'out of stock'}
                   </p>
-                  <p className="info">
+                  <p className={styles.info}>
                     <span>SKU : </span>
                     {sku}
                   </p>
-                  <p className="info">
+                  <p className={styles.info}>
                     <span>Brand : </span>
                     {brand}
                   </p>
@@ -293,7 +320,7 @@ const ProductDetail = (props) => {
                       )
                     })}
                   </select>
-                  <div className="colors">
+                  <div className={styles.colors}>
                     <span> colors : </span>
                     <div>
                       {colors.map((color, index) => {
@@ -301,11 +328,11 @@ const ProductDetail = (props) => {
                           <button
                             key={index}
                             style={{ background: color }}
-                            className={`${
-                              mainColor === color
-                                ? 'color-btn active'
-                                : 'color-btn'
-                            }`}
+                            className={
+                              `${mainColor}` === color
+                                ? `${styles.active}`
+                                : null
+                            }
                             onClick={() => setMainColor(color)}
                           >
                             {mainColor === color ? <FaCheck /> : null}
@@ -333,9 +360,45 @@ const ProductDetail = (props) => {
                 </div>
               </Col>
               <Col lg="12" className="mt-5">
-                <h2 className="related__title">You might also like</h2>
+                <h2 className={styles.related__title}>You might also like</h2>
               </Col>
               <ProductList products={relatedProducts} />
+            </Row>
+          </Container>
+        </section>
+        <section className={styles.review}>
+          <Container>
+            <Row>
+              <Col lg="12" className="mb-5">
+                <h3 className={styles.reviewed__title}>Product Reviews</h3>
+
+                <Card cardClass={styles.card}>
+                  <div>
+                    {filteredReviews.length === 0 ? (
+                      <p>There are no reviews for this product</p>
+                    ) : (
+                      <>
+                        {filteredReviews.map((item, index) => {
+                          const { rate, review, reviewDate, userName } = item
+                          return (
+                            <div key={index} className={styles.review}>
+                              <StarsRating value={rate} />
+                              <p>{review}</p>
+                              <span>
+                                <b>{reviewDate}</b>
+                              </span>
+                              <br />
+                              <span>
+                                <b>By: {userName}</b>
+                              </span>
+                            </div>
+                          )
+                        })}
+                      </>
+                    )}
+                  </div>
+                </Card>
+              </Col>
             </Row>
           </Container>
         </section>
