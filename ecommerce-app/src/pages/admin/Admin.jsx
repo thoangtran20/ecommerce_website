@@ -4,6 +4,7 @@ import AddProducts from '../../components/admin/addProducts/AddProducts'
 import AdminHome from '../../components/admin/home/AdminHome'
 import Navbar from '../../components/admin/navbar/Navbar'
 import Orders from '../../components/admin/orders/Orders'
+import ViewOrder from '../../components/admin/viewOrder/ViewOrder'
 import ViewProducts from '../../components/admin/viewProducts/ViewProducts'
 import styles from './Admin.module.scss'
 
@@ -19,6 +20,7 @@ const Admin = () => {
           <Route path="all-products" element={<ViewProducts />} />
           <Route path="add-products/:id" element={<AddProducts />} />
           <Route path="orders" element={<Orders />} />
+          <Route path="view-order/:id" element={<ViewOrder />} />
         </Routes>
       </div>
     </div>

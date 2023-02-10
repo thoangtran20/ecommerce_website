@@ -50,9 +50,6 @@ const ProductDetail = (props) => {
   const { document } = useFetchDocument('products', id)
   console.log(document)
 
-  // const { documentReview } = useFetchDocument('reviews', id)
-  // console.log(documentReview)
-
   const getProduct = async () => {
     const docRef = doc(db, 'products', id)
     const docSnap = await getDoc(docRef)
@@ -68,9 +65,6 @@ const ProductDetail = (props) => {
     }
   }
 
-  // const getProduct = () => {
-  //   setProduct(document)
-  // }
 
   const navigate = useNavigate()
 
@@ -87,24 +81,18 @@ const ProductDetail = (props) => {
     return true
   }
 
-  // const activeLink = ({ isActive }) => (isActive ? `${styles.active}` : '')
-
   const { data } = useFetchCollection('products')
   console.log(data)
 
-  const { data1 } = useFetchCollection('reviews')
-  console.log(data1)
+  const fbReivews = useFetchCollection('reviews')
 
-  const products = useSelector(selectProducts)
-  console.log(products)
+  const fbReviewsData = fbReivews.data
+  console.log(fbReviewsData)
 
-  const filteredReviews = data1.filter((review) => review.productID === id)
+  const filteredReviews = fbReviewsData.filter(
+    (review) => review.productID === id,
+  )
   console.log(filteredReviews)
-
-  // const cartItems = useSelector(selectCartItems)
-  // const isCartAdded = cartItems.findIndex((cart) => {
-  //   return cart.id === id
-  // })
 
   // const [previewImg, setPreviewImg] = useState(img1)
   // setPreviewImg(img1)
@@ -118,10 +106,6 @@ const ProductDetail = (props) => {
   useEffect(() => {
     setProduct(document)
   }, [document])
-
-  // useEffect(() => {
-  //   dispatch(STORE_REVIEWS(reviewsData))
-  // }, [dispatch, reviewsData])
 
   const dispatch = useDispatch()
 
@@ -343,8 +327,6 @@ const ProductDetail = (props) => {
                   </div>
                   <h4>Product Details</h4>
                   <span>{description}</span>
-                  {/* <input type="number" value="1" /> */}
-
                   {stock > 0 && (
                     <AmountButton
                       amount={amount}

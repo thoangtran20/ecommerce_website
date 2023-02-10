@@ -5,7 +5,6 @@ import { db } from '../firebase/config'
 
 const useFetchCollection = (collectionName) => {
   const [data, setData] = useState([])
-  const [data1, setData1] = useState([])
   const [isLoading, setIsLoading] = useState(false)
 
   const getCollection = () => {
@@ -21,7 +20,6 @@ const useFetchCollection = (collectionName) => {
         }))
         // console.log(allData);
         setData(allData)
-        setData1(allData)
         setIsLoading(false)
       })
     } catch (error) {
@@ -34,7 +32,7 @@ const useFetchCollection = (collectionName) => {
     getCollection()
   }, [])
 
-  return { data, data1, isLoading }
+  return { data, isLoading }
 }
 
 export default useFetchCollection

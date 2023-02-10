@@ -76,10 +76,16 @@ const Login = () => {
 
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // const user = userCredential.user
+        const user = userCredential.user
         setIsLoading(false)
+        console.log('User ID: ', user.uid)
+
         toast.success('Login Successful!!!')
-        redirectUser()
+        if (email === 'admin@gmail.com') {
+          return navigate('/admin/home')
+        } else {
+          redirectUser()
+        }
       })
       .catch((error) => {
         setIsLoading(false)

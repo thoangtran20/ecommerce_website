@@ -85,7 +85,7 @@ function App() {
             path={ROUTERS.reset}
             element={<CustomerLayout content={<Reset />} />}
           />
-          <Route
+          {/* <Route
             path={ROUTERS.admin}
             element={
               // <Admin />
@@ -93,8 +93,15 @@ function App() {
                 <Admin />
               </AdminOnlyRoute>
             }
+          /> */}
+          <Route
+            path={ROUTERS.admin}
+            element={
+              <AdminOnlyRoute>
+                <Admin />
+              </AdminOnlyRoute>
+            }
           />
-
           {/* <Route
             path={ROUTERS.admin}
             element={<AdminLayout />}

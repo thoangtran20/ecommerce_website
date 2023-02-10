@@ -22,11 +22,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   REMOVE_ACTIVE_USER,
   selectIsLoggedIn,
-  selectUserID,
-  selectUserName,
+  // selectUserID,
+  // selectUserName,
   SET_ACTIVE_USER,
 } from '../../stores/slice/authSlice'
-import AdminOnlyRoute, { AdminOnlyLink } from '../adminOnlyRoute/AdminOnlyRoute'
+import { AdminOnlyLink } from '../adminOnlyRoute/AdminOnlyRoute'
 import {
   cartActions,
   selectCartTotalQuantity,
@@ -145,7 +145,7 @@ const Header = () => {
 
   console.log(cartTotalQuantity)
 
-  const [visible, setVisible] = useState(false)
+  // const [visible, setVisible] = useState(false)
 
   const navigateToCart = () => {
     navigate(ROUTERS.cart)
@@ -207,9 +207,9 @@ const Header = () => {
     })
   }, [dispatch, displayName])
 
-  const gotoLogin = () => {
-    navigate('/login')
-  }
+  // const gotoLogin = () => {
+  //   navigate('/login')
+  // }
 
   const stickyHeaderFunction = () => {
     window.addEventListener('scroll', () => {

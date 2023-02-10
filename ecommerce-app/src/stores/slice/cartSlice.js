@@ -129,7 +129,7 @@ const cartSlice = createSlice({
       toast.info(`Cart cleared!!!`, {
         position: 'top-left',
       })
-      localStorage.setItem('cartItemKey', JSON.stringify(state.cartItems))
+      localStorage.removeItem('cartItemKey')
     },
     SAVE_URL(state, action) {
       console.log(action.payload)

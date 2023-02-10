@@ -1,13 +1,29 @@
 import { Button, Result } from 'antd'
-import { useSelector } from 'react-redux'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { selectEmail } from '../../stores/slice/authSlice'
 
 const AdminOnlyRoute = ({ children }) => {
+  // const auth = getAuth()
+  // const [email, setEmail] = useState(null)
+  // console.log("hello")
+  // onAuthStateChanged(auth, (user) => {
+  //   if (user) {
+  //     const userEmail = user.email
+  //     console.log(userEmail)
+  //     setEmail(userEmail)
+  //   } else {
+  //     setEmail('')
+  //   }
+  // })
+
   const userEmail = useSelector(selectEmail)
   console.log(userEmail)
 
-  if (userEmail === 'admin123@gmail.com') {
+  if (userEmail === 'admin@gmail.com') {
     return children
   }
 
@@ -21,16 +37,6 @@ const AdminOnlyRoute = ({ children }) => {
           <button className="--btn">&larr; Back To Home</button>
         </Link>
       </div>
-      {/* <Result
-        status="403"
-        title="403"
-        subTitle="Sorry, you are not authorized to access this page."
-        extra={
-          <Link to="/">
-            <Button type="primary">Back Home</Button>
-          </Link>
-        }
-      /> */}
     </section>
   )
 }
@@ -39,7 +45,20 @@ export const AdminOnlyLink = ({ children }) => {
   const userEmail = useSelector(selectEmail)
   console.log(userEmail)
 
-  if (userEmail === 'admin123@gmail.com') {
+  // const auth = getAuth()
+  // const [email, setEmail] = useState(null)
+  // console.log(email)
+  // onAuthStateChanged(auth, (user) => {
+  //   if (user) {
+  //     const userEmail = user.email
+  //     console.log(userEmail)
+  //     setEmail(userEmail)
+  //   } else {
+  //     setEmail('')
+  //   }
+  // })
+
+  if (userEmail === 'admin@gmail.com') {
     return children
   }
   return null
