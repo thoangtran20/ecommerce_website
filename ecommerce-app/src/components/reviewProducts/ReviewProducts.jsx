@@ -39,14 +39,9 @@ const ReviewProducts = () => {
   const { document } = useFetchDocument('products', id)
   console.log(document)
 
-  // console.log(document.id)
-
   useEffect(() => {
     setProduct(document)
   }, [document])
-
-  // const product = products.find((item) => item.id === id)
-  // console.log(product)
 
   const submitReview = (e) => {
     e.preventDefault()

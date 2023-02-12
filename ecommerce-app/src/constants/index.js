@@ -12,6 +12,7 @@ export const ROUTERS = {
   orderHistory: '/order-history',
   orderDetail: '/order-detail/:id',
   reviewProduct: '/review-product/:id',
+  contact: '/contact',
   login: 'login',
   register: 'register',
   reset: 'reset',

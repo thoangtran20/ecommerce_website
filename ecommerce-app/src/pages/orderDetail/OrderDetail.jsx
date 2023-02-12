@@ -5,21 +5,51 @@ import spinnerImg from '../../assets/images/spinner.jpg'
 import useFetchDocument from '../../customHooks/useFetchDocument'
 import { Link } from 'react-router-dom'
 import { Col, Container, Row, Table } from 'reactstrap'
+import Notiflix from 'notiflix'
+import { deleteDoc, doc } from 'firebase/firestore'
+import { deleteObject, ref } from 'firebase/storage'
+import { db, storage } from '../../firebase/config'
+import { toast } from 'react-toastify'
 
 const OrderDetail = () => {
   const { id } = useParams()
-  console.log(id)
-
   const [order, setOrder] = useState(null)
   const { document } = useFetchDocument('orders', id)
-
-  console.log(document)
 
   useEffect(() => {
     setOrder(document)
   }, [document])
 
-  console.log(order)
+  const confirmDelete = (id) => {
+    Notiflix.Confirm.show(
+      'Delete Product!!!',
+      'You are about to delete to delete product',
+      'Delete',
+      'Cancel',
+      function okCb() {
+        deleteOrder(id)
+      },
+      function cancelCb() {
+        console.log('Delete Canceled')
+      },
+      {
+        width: '320px',
+        borderRadius: '4px',
+        titleColor: 'orangered',
+        okButtonBackground: 'orangered',
+        cssAnimationStyle: 'zoom',
+      },
+    )
+  }
+
+  const deleteOrder = async (id) => {
+    try {
+      await deleteDoc(doc(db, 'orders', id))
+      toast.success('Order cancelled successfully')
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
 
   return (
     <section>
@@ -46,9 +76,22 @@ const OrderDetail = () => {
                   <p>
                     <b>Order Amount: </b> {order.orderAmount}
                   </p>
-                  <p>
-                    <b>Order Status: </b> {order.orderStatus}
-                  </p>
+                  <div className="--flex-between">
+                    <p>
+                      <b>Order Status: </b> {order.orderStatus}
+                    </p>
+                    {order.orderStatus !== 'Delivered' ? (
+                      <button
+                        onClick={() => confirmDelete(order.id)}
+                        className="--btn --btn-danger"
+                      >
+                        Cancel Order
+                      </button>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+
                   <br />
                   <Table responsive>
                     <thead>

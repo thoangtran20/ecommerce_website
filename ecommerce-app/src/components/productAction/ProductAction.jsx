@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { BsFillGridFill } from 'react-icons/bs'
 import { FaListAlt } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
-import { Pagination } from 'reactstrap'
+// import { Pagination } from 'reactstrap'
 import {
   FILTER_BY_SEARCH,
   selectFilteredProducts,

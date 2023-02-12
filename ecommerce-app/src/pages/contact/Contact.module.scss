@@ -1,0 +1,91 @@
+.contact {
+  .card {
+    padding: 1rem;
+    font-family: 'Nunito Sans', sans-serif;
+    border: 1px solid #ccc;
+  }
+
+  .card2 {
+    padding: 2rem;
+    font-size: 1rem;
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: var(--clr-red-dark);
+    color: #fff;
+
+    h3 {
+      font-size: 2.2rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+    h3,
+    p {
+      color: #fff;
+    }
+    .icons {
+      margin: 3rem 0;
+      span {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        margin-bottom: 1rem;
+        a,
+        p {
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+
+  .section {
+    display: flex;
+    align-items: start;
+
+    form {
+      // width: 500px;
+      // max-width: 100%;
+      margin-right: 1rem;
+      margin-bottom: 1rem;
+      label {
+        display: block;
+        font-size: 1.4rem;
+        font-weight: 500;
+      }
+      input[type='text'],
+      input[type='number'],
+      input[type='file'],
+      input[type='email'],
+      select,
+      textarea,
+      input[type='password'] {
+        // display: block;
+        font-size: 1.2rem;
+        font-weight: 300;
+        padding: 1rem;
+        margin: 1rem auto;
+        width: 100%;
+        border: 1px solid #777;
+        border-radius: 3px;
+        outline: none;
+      }
+
+      .errors {
+        color: var(--red-color);
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      button {
+        margin-top: 50px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .contact {
+    .section {
+      flex-direction: column;
+    }
+  }
+}

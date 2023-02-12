@@ -3,6 +3,7 @@ import styles from './AdminHome.module.scss'
 import AdminOnlyRoute from '../../adminOnlyRoute/AdminOnlyRoute'
 import { AiFillDollarCircle } from 'react-icons/ai'
 import { BsCart4 } from 'react-icons/bs'
+// import Chart from '../chart/Chart'
 import InfoBox from '../infoBox/InfoBox'
 import { FaCartArrowDown } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,6 +11,7 @@ import {
   selectProducts,
   STORE_PRODUCTS,
 } from '../../../stores/slice/productSlice'
+
 import {
   CALC_TOTAL_ORDERS_AMOUNT,
   selectOrderHistory,
@@ -17,6 +19,7 @@ import {
   STORE_ORDERS,
 } from '../../../stores/slice/orderSlice'
 import useFetchCollection from '../../../customHooks/useFetchCollection'
+import Chart from '../chart/Chart'
 
 const AdminHome = () => {
   // Icons
@@ -69,6 +72,9 @@ const AdminHome = () => {
           count={orders.length}
           icon={ordersIcon}
         />
+      </div>
+      <div>
+        <Chart />
       </div>
     </div>
   )

@@ -21,6 +21,7 @@ import CheckoutSuccess from './pages/checkout/CheckoutSuccess'
 import OrderHistory from './pages/orderHistory/OrderHistory'
 import OrderDetail from './pages/orderDetail/OrderDetail'
 import ReviewProducts from './components/reviewProducts/ReviewProducts'
+import Contact from './pages/contact/Contact'
 
 function App() {
   return (
@@ -74,6 +75,10 @@ function App() {
             element={<CustomerLayout content={<ReviewProducts />} />}
           />
           <Route
+            path={ROUTERS.contact}
+            element={<CustomerLayout content={<Contact />} />}
+          />{' '}
+          <Route
             path={ROUTERS.login}
             element={<CustomerLayout content={<Login />} />}
           />
@@ -85,15 +90,6 @@ function App() {
             path={ROUTERS.reset}
             element={<CustomerLayout content={<Reset />} />}
           />
-          {/* <Route
-            path={ROUTERS.admin}
-            element={
-              // <Admin />
-              <AdminOnlyRoute>
-                <Admin />
-              </AdminOnlyRoute>
-            }
-          /> */}
           <Route
             path={ROUTERS.admin}
             element={
@@ -102,11 +98,6 @@ function App() {
               </AdminOnlyRoute>
             }
           />
-          {/* <Route
-            path={ROUTERS.admin}
-            element={<AdminLayout />}
-            content={<Admin />}
-          /> */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

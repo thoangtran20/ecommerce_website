@@ -6,6 +6,10 @@
   .search {
     width: 100%;
     max-width: 300px;
+
+    p b {
+      color: var(--primary-color);
+    }
   }
 
   table {
