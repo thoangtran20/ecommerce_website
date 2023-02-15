@@ -1,0 +1,27 @@
+section {
+  padding: 100px 0px;
+  height: auto;
+  width: 100%;
+
+  .profile__container {
+    display: flex;
+    margin: 20px;
+
+    .info__form {
+      .form__content {
+        display: flex;
+        justify-content: space-between;
+        h5 {
+          text-align: left;
+        }
+      }
+    }
+    h6 {
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      color: #8758ff;
+      font-weight: 700;
+      font-size: 24px;
+    }
+  }
+}

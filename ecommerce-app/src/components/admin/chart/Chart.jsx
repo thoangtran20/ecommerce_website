@@ -56,7 +56,7 @@ const Chart = () => {
     'Shipped...',
     'Delivered',
   ]
-
+  
   const placed = getOrderCount(array, q1)
   const processing = getOrderCount(array, q2)
   const shipped = getOrderCount(array, q3)

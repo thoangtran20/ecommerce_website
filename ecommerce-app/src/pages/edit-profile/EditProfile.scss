@@ -1,0 +1,88 @@
+section {
+  padding: 100px 0px;
+  height: auto;
+  width: 100%;
+
+  .profile__container {
+    display: flex;
+    margin: 20px;
+
+    .edit__form {
+      .form__group {
+        label {
+          float: left;
+          font-weight: 500;
+          font-size: 18px;
+        }
+        input {
+          width: 100%;
+          border-radius: 5px;
+          font-size: 14px;
+          padding: 8px 20px;
+        }
+
+        .errors-message {
+          color: red;
+          font-size: 13px;
+          text-align: left;
+          margin-left: 10px;
+        }
+      }
+      .form__radio {
+        label {
+          float: left;
+          font-weight: 500;
+          font-size: 18px;
+        }
+        .group__radio {
+          display: flex;
+          padding-top: 5px;
+          padding-left: 30px;
+          justify-content: flex-start;
+
+          .radio__item {
+            font-size: 14px;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+    h6 {
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      color: #8758ff;
+      font-weight: 700;
+      font-size: 24px;
+    }
+
+    .submit__btn {
+      border: none;
+      text-transform: uppercase;
+      outline: none;
+      font-size: 16px;
+      width: 100px;
+      height: auto;
+      padding: 10px 20px;
+      border-radius: 5px;
+      background-color: #3f3b6c;
+      color: #fff;
+      margin-top: 20px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .submit__btn a {
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .submit__btn a:hover {
+      color: #fff;
+    }
+
+    .profile__pic {
+      display: flex;
+      margin: 20px;
+    }
+  }
+}

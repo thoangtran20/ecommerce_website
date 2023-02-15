@@ -4,7 +4,7 @@ import loginImg from '../../assets/images/auths/login.jpg'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { RiGoogleLine } from 'react-icons/ri'
 import Card from '../../components/card/Card'
-import { auth } from '../../firebase/config'
+import { auth, db } from '../../firebase/config'
 import { AiFillEyeInvisible as EyeOff, AiFillEye as Eye } from 'react-icons/ai'
 import { toast } from 'react-toastify'
 
@@ -21,6 +21,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useSelector } from 'react-redux'
 import { selectPreviousURL } from '../../stores/slice/cartSlice'
 import { ROUTERS } from '../../constants'
+import { addDoc, collection, Timestamp } from 'firebase/firestore'
+import { selectUserName } from '../../stores/slice/authSlice'
 
 const schema = yup.object().shape({
   email: yup
@@ -40,6 +42,9 @@ const Login = () => {
   const [passwordType, setPasswordType] = useState('password')
   const [icon, setIcon] = useState(EyeOff)
   const navigate = useNavigate()
+
+  const userName = useSelector(selectUserName)
+  console.log(userName)
 
   const previousURL = useSelector(selectPreviousURL)
 
@@ -78,7 +83,19 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user
         setIsLoading(false)
+        console.log(user)
         console.log('User ID: ', user.uid)
+        const userConfig = {
+          email: user.email,
+          userID: user.uid,
+          userName: user.displayName,
+          password: password,
+          createdAt: Timestamp.now().toDate(),
+        }
+
+        console.log(userConfig)
+
+        addDoc(collection(db, 'users'), userConfig)
 
         toast.success('Login Successful!!!')
         if (email === 'admin@gmail.com') {
@@ -98,8 +115,8 @@ const Login = () => {
   const signInWithGoogle = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
-        // const user = result.user
-        toast.success('Login Successfully')
+        // const user = result.user;
+        toast.success('Login Successfully!!!')
         redirectUser()
       })
       .catch((error) => {

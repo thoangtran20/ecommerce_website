@@ -8,8 +8,8 @@ export const OrderStatus = [
     title: 'Processing...',
   },
   {
-    value: 'Shipped..',
-    title: 'Shipped..',
+    value: 'Shipped...',
+    title: 'Shipped...',
   },
   {
     value: 'Delivered',

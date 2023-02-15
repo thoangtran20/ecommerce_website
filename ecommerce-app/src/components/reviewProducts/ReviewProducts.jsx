@@ -77,7 +77,7 @@ const ReviewProducts = () => {
           <img src={spinnerImg} alt="Loading..." style={{ width: '50px' }} />
         ) : (
           <>
-            <p>
+src/styles            <p>
               <b>Product: </b> {product.name}
             </p>
             <img

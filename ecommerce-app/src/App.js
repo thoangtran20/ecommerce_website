@@ -22,6 +22,9 @@ import OrderHistory from './pages/orderHistory/OrderHistory'
 import OrderDetail from './pages/orderDetail/OrderDetail'
 import ReviewProducts from './components/reviewProducts/ReviewProducts'
 import Contact from './pages/contact/Contact'
+import About from './pages/about/About'
+import Profile from './pages/profile/Profile'
+import EditProfile from './pages/edit-profile/EditProfile'
 
 function App() {
   return (
@@ -77,6 +80,18 @@ function App() {
           <Route
             path={ROUTERS.contact}
             element={<CustomerLayout content={<Contact />} />}
+          />{' '}
+          <Route
+            path={ROUTERS.about}
+            element={<CustomerLayout content={<About />} />}
+          />{' '}
+          <Route
+            path={ROUTERS.profile}
+            element={<CustomerLayout content={<Profile />} />}
+          />{' '}
+          <Route
+            path={ROUTERS.editProfile}
+            element={<CustomerLayout content={<EditProfile />} />}
           />{' '}
           <Route
             path={ROUTERS.login}

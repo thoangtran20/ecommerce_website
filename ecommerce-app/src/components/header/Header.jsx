@@ -12,11 +12,11 @@ import { motion } from 'framer-motion'
 import logo from '../../assets/images/fashion-company-logo-png-transparent.png'
 import userIcon from '../../assets/images/user-icon.png'
 import './Header.scss'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate, useParams } from 'react-router-dom'
 import { ROUTERS } from '../../constants'
 import { Dropdown, Menu, Space } from 'antd'
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
-import { auth } from '../../firebase/config'
+import { auth, db } from '../../firebase/config'
 import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -32,6 +32,7 @@ import {
   selectCartTotalQuantity,
 } from '../../stores/slice/cartSlice'
 import Notiflix from 'notiflix'
+import { addDoc, collection, Timestamp } from 'firebase/firestore'
 
 const Header = () => {
   const nav__links = [
@@ -56,6 +57,9 @@ const Header = () => {
       display: 'Blog',
     },
   ]
+
+  // const { id } = useParams()
+  // console.log(id)
 
   const confirmLogout = () => {
     Notiflix.Confirm.show(
@@ -98,7 +102,7 @@ const Header = () => {
     {
       key: '2',
       label: (
-        <NavLink to={'/profile'}>
+        <NavLink to={'/profile/'}>
           <p target="_blank" rel="noopener noreferrer">
             User Information
           </p>
@@ -131,12 +135,17 @@ const Header = () => {
     },
   ]
   const navigate = useNavigate()
+
+  // Khoi tao ref de tham chieu den element can sua doi thong tin khong can dung den props, state
   const menuRef = useRef(null)
   const headerRef = useRef(null)
+
+  // Lay state từ Redux store bằng cách sử dụng một selector function làm tham số đầu vào selectIsLoggedIn = (state) => (state.auth.isLoggedIn)
 
   const isLoggedIn = useSelector(selectIsLoggedIn)
   console.log(isLoggedIn)
 
+  // Return về một tham chiếu đến dispatch function từ Redux store và được sử dụng để dispatch các action
   const dispatch = useDispatch()
 
   const [displayName, setDisplayName] = useState('')
@@ -155,6 +164,7 @@ const Header = () => {
     menuRef.current.classList.toggle('active__menu')
   }
 
+  // Dang xuat user ra khoi web
   const logoutUser = () => {
     // e.preventDefault()
     dispatch(cartActions.CLEAR_CART())
@@ -168,6 +178,7 @@ const Header = () => {
       })
   }
 
+  // 
   useEffect(() => {
     dispatch(cartActions.CALCULATE_TOTAL_QUANTITY())
   }, [])
@@ -192,6 +203,7 @@ const Header = () => {
         } else {
           setDisplayName(user.displayName)
         }
+        console.log(user)
 
         dispatch(
           SET_ACTIVE_USER({
@@ -207,10 +219,7 @@ const Header = () => {
     })
   }, [dispatch, displayName])
 
-  // const gotoLogin = () => {
-  //   navigate('/login')
-  // }
-
+  // Scroll doi mau header navbar neu di chuyen xuong mot goc > 80
   const stickyHeaderFunction = () => {
     window.addEventListener('scroll', () => {
       if (
@@ -225,7 +234,6 @@ const Header = () => {
   }
   useEffect(() => {
     stickyHeaderFunction()
-
     return () => window.removeEventListener('scroll', stickyHeaderFunction)
   })
 

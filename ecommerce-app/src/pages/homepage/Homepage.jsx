@@ -1,38 +1,31 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Col, Container, Row } from 'reactstrap'
 import './Homepage.scss'
 import Feature from '../../components/feature/Feature'
-import Footer from '../../components/footer/Footer'
-import Header from '../../components/header/Header'
 import Slider from '../../components/slider/Slider'
 import ProductList from '../productList/ProductList'
-// import { products } from '../../data/ProductData'
 import Helmet from '../../components/helmet/Helmet'
 import useFetchCollection from '../../customHooks/useFetchCollection'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectProducts, STORE_PRODUCTS } from '../../stores/slice/productSlice'
 
 const Homepage = () => {
-  const [featuredProducts, setFeaturedProducts] = useState([])
-  const [newArrivalProducts, setNewArrivalProducts] = useState([])
-
   const url = window.location.href
 
-  const scrollToProducts = () => {
-    if (url.includes('#products')) {
-      window.scrollTo({
-        top: 700,
-        behavior: 'smooth',
-      })
-      return
-    }
-  }
-
   useEffect(() => {
+    const scrollToProducts = () => {
+      if (url.includes('#products')) {
+        window.scrollTo({
+          top: 700,
+          behavior: 'smooth',
+        })
+        return
+      }
+    }
     scrollToProducts()
-  }, [])
+  }, [url])
 
-  const { data, isLoading } = useFetchCollection('products')
+  const { data } = useFetchCollection('products')
   const products = useSelector(selectProducts)
   console.log(products)
 
@@ -46,16 +39,6 @@ const Homepage = () => {
     )
   }, [dispatch, data])
 
-  // useEffect(() => {
-  //   const filterFeaturedProducts = products.filter(
-  //     (item) => item.category === 'T-shirt',
-  //   )
-  //   const filterNewArrivalProducts = products.filter(
-  //     (item) => item.category === 'skirt',
-  //   )
-  //   setFeaturedProducts(filterFeaturedProducts)
-  //   setNewArrivalProducts(filterNewArrivalProducts)
-  // }, [])
   return (
     <Helmet title={'Home'}>
       <div className="homepage">
@@ -69,7 +52,6 @@ const Homepage = () => {
                 <p>Summer Collection New Modern Design</p>
               </Col>
               <ProductList products={products.slice(0, 6)} />
-              {/* <ProductList data={products.slice(0, 6)} /> */}
             </Row>
           </Container>
         </section>
@@ -94,8 +76,6 @@ const Homepage = () => {
                 <p>Summer Collection New Modern Design</p>
               </Col>
               <ProductList products={products.slice(12, 20)} />
-
-              {/* <ProductList data={products.slice(12, 20)} /> */}
             </Row>
           </Container>
         </section>

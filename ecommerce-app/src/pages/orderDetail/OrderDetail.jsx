@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router'
+import { useParams } from 'react-router'
 import styles from './OrderDetail.module.scss'
 import spinnerImg from '../../assets/images/spinner.jpg'
 import useFetchDocument from '../../customHooks/useFetchDocument'
@@ -7,8 +7,7 @@ import { Link } from 'react-router-dom'
 import { Col, Container, Row, Table } from 'reactstrap'
 import Notiflix from 'notiflix'
 import { deleteDoc, doc } from 'firebase/firestore'
-import { deleteObject, ref } from 'firebase/storage'
-import { db, storage } from '../../firebase/config'
+import { db } from '../../firebase/config'
 import { toast } from 'react-toastify'
 
 const OrderDetail = () => {

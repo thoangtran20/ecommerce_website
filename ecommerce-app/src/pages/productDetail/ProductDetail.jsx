@@ -15,21 +15,14 @@ import Card from '../../components/card/Card'
 import spinnerImg from '../../assets/images/spinner.jpg'
 import { db } from '../../firebase/config'
 import {
-  RiStackFill,
   RiStarHalfFill,
-  RiStarHalfSFill,
   RiStarSFill,
 } from 'react-icons/ri'
 import { FaCheck } from 'react-icons/fa'
-import { useDispatch, useSelector } from 'react-redux'
-import {
-  REMOVE,
-  selectProducts,
-  STORE_PRODUCTS,
-} from '../../stores/slice/productSlice'
+import { useDispatch } from 'react-redux'
 import useFetchCollection from '../../customHooks/useFetchCollection'
 import AmountButton from '../../components/amount-button/AmountButton'
-import { cartActions, selectCartItems } from '../../stores/slice/cartSlice'
+import { cartActions  } from '../../stores/slice/cartSlice'
 import { toast } from 'react-toastify'
 import ProductList from '../productList/ProductList'
 import { ROUTERS } from '../../constants'
@@ -93,10 +86,6 @@ const ProductDetail = (props) => {
     (review) => review.productID === id,
   )
   console.log(filteredReviews)
-
-  // const [previewImg, setPreviewImg] = useState(img1)
-  // setPreviewImg(img1)
-
   // ComponentDidMount - ComponmentDidUpdate
 
   useEffect(() => {
@@ -114,10 +103,6 @@ const ProductDetail = (props) => {
   } else {
     const {
       imgURL: img1,
-      // img2,
-      // img3,
-      // img4,
-      // img5,
       name,
       price,
       brand,
@@ -179,7 +164,6 @@ const ProductDetail = (props) => {
         navigate(ROUTERS.cart)
       }
     }
-    // console.log(colors)
     return (
       <Helmet title={name}>
         <CommonSection title={name} />
@@ -204,31 +188,26 @@ const ProductDetail = (props) => {
                   <div className={styles.small__imgGroup}>
                     <div
                       className={styles.small__imgCol}
-                      // onClick={() => setPreviewImg(img1)}
                     >
                       <img src={img1} className={styles.small__img} alt="" />
                     </div>
                     <div
                       className={styles.small__imgCol}
-                      // onClick={() => setPreviewImg(img1)}
                     >
                       <img src={img1} className={styles.small__img} alt="" />
                     </div>
                     <div
                       className={styles.small__imgCol}
-                      // onClick={() => setPreviewImg(img1)}
                     >
                       <img src={img1} className={styles.small__img} alt="" />
                     </div>
                     <div
                       className={styles.small__imgCol}
-                      // onClick={() => setPreviewImg(img1)}
                     >
                       <img src={img1} className={styles.small__img} alt="" />
                     </div>
                     <div
                       className={styles.small__imgCol}
-                      // onClick={() => setPreviewImg(img1)}
                     >
                       <img src={img1} className={styles.small__img} alt="" />
                     </div>

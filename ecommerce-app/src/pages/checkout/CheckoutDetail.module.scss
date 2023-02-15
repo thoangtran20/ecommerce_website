@@ -14,6 +14,8 @@
 
   form {
     font-family: 'Josefin Sans', sans-serif;
+    width: 100%;
+    // display: flex;
 
     label {
       font-size: 1.4rem;
@@ -27,21 +29,21 @@
       font-weight: 600;
     }
 
-    // label {
-    //   display: block;
-    //   font-size: 1.4rem;
-    //   font-weight: 500;
-    // }
+    label {
+      display: block;
+      font-size: 1.4rem;
+      font-weight: 500;
+    }
 
     input[type='text'],
     .select {
-      // display: block;
+      display: block;
       font-size: 1.1rem;
       font-weight: 400;
       padding: 0.6rem;
       margin: 0.5rem auto;
       width: 100%;
-      border: 1px solid #777;
+      border: 1px solid #091353;
       border-radius: 3px;
       outline: none;
     }
