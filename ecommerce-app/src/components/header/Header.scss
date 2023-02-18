@@ -12,6 +12,7 @@
 
   .logo {
     display: flex;
+    margin-right: 0;
     align-items: center;
     column-gap: 10px;
 
@@ -277,6 +278,29 @@
   }
 }
 
+@media only screen and (max-width: 992px) {
+  .nav__wrapper {
+    .logo {
+      margin-right: 50px;
+      img {
+        width: 3rem;
+        height: 3rem;
+      }
+      span {
+        font-size: 1.5rem;
+      }
+    }
+    .navigation {
+      .menu {
+        font-size: 1.2rem;
+        .btn {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
 @media only screen and (min-width: 992px) {
   .mobile__menu {
     display: none;
@@ -284,7 +308,17 @@
   .close {
     display: none;
   }
+  .logo {
+    img {
+      width: 2rem;
+      height: 2rem;
+    }
+    span {
+      font-size: 1.5rem;
+    }
+  }
   .menu {
+    font-size: 0.8rem;
     .nav__icons {
       display: none;
     }

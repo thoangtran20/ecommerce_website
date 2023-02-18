@@ -40,11 +40,11 @@ const About = () => {
           </div>
         </Col>
         <Col lg="12" className="banner__area pt-10 mb-5">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-4 col-md-4">
+          <Container>
+            <Row>
+              <Col lg="4" md="4">
                 <div className="single__banner mb-30">
-                  <a href="#">
+                  <a href="#!">
                     <img src={bannerSkirt} alt="" />
                   </a>
                   <div className="banner__content">
@@ -52,17 +52,18 @@ const About = () => {
                     <h4>
                       Starting at <span>$24.00</span>
                     </h4>
-                    <a href="#">
+                    <a href="#!">
                       <i>
                         <FaLongArrowAltRight />
                       </i>
                     </a>
                   </div>
                 </div>
-              </div>
-              <div className="col-lg-4 col-md-4">
+              </Col>
+              <Col lg="4" md="4">
+                {' '}
                 <div className="single__banner mb-30">
-                  <a href="">
+                  <a href="#!">
                     <img src={bannerTshirt} alt="" />
                   </a>
                   <div className="banner__content">
@@ -70,17 +71,17 @@ const About = () => {
                     <h4>
                       Starting at <span>$63.00</span>
                     </h4>
-                    <a href="#">
+                    <a href="#!">
                       <i>
                         <FaLongArrowAltRight />
                       </i>
                     </a>
                   </div>
                 </div>
-              </div>
-              <div className="col-lg-4 col-md-4">
+              </Col>
+              <Col lg="4" md="4">
                 <div className="single__banner mb-30">
-                  <a href="#">
+                  <a href="#!">
                     <img src={bannerJeans} alt="" />
                   </a>
                   <div className="banner__content">
@@ -88,22 +89,22 @@ const About = () => {
                     <h4>
                       Starting at <span>$49.00</span>
                     </h4>
-                    <a href="#">
+                    <a href="#!">
                       <i>
                         <FaLongArrowAltRight />
                       </i>
                     </a>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
+              </Col>
+            </Row>
+          </Container>
         </Col>
 
         <Col lg="12" className="about__misssion pb-30">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-4 col-md-4">
+          <Container>
+            <Row>
+              <Col lg="4" md="4">
                 <div className="single__mission mb-30">
                   <h3>Our Vision</h3>
                   <p>
@@ -113,8 +114,8 @@ const About = () => {
                     explorer of the truth.
                   </p>
                 </div>
-              </div>
-              <div className="col-lg-4 col-md-4">
+              </Col>
+              <Col lg="4" md="4">
                 <div className="single__mission mb-30">
                   <h3>Our Mission</h3>
                   <p>
@@ -124,8 +125,8 @@ const About = () => {
                     explorer of the truth.
                   </p>
                 </div>
-              </div>
-              <div className="col-lg-4 col-md-4">
+              </Col>
+              <Col lg="4" md="4">
                 <div className="single__mission mb-30">
                   <h3>Our Goal</h3>
                   <p>
@@ -135,13 +136,13 @@ const About = () => {
                     explorer of the truth.
                   </p>
                 </div>
-              </div>
-            </div>
-          </div>
+              </Col>
+            </Row>
+          </Container>
         </Col>
 
         <Col lg="12" className="team__area">
-          <div className="container">
+          <Container>
             <div className="section__title text-center mb-60">
               <h2>Co Founders</h2>
               <p>
@@ -149,8 +150,8 @@ const About = () => {
                 eiusmod tempor incididunt labor et dolore magna aliqua
               </p>
             </div>
-            <div className="row">
-              <div className="col-lg-6 col-md-6 col-sm-6 ">
+            <Row>
+              <Col lg="6" md="6" sm="6">
                 <div className="team__wrapper mb-30 ">
                   <div className="team__img">
                     <img src={ava1} alt="" className="mx-auto d-block" />
@@ -193,9 +194,9 @@ const About = () => {
                     <span>Project Owner</span>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
+              </Col>
+            </Row>
+          </Container>
         </Col>
       </Row>
     </Container>

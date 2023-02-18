@@ -12,18 +12,16 @@ import { motion } from 'framer-motion'
 import logo from '../../assets/images/fashion-company-logo-png-transparent.png'
 import userIcon from '../../assets/images/user-icon.png'
 import './Header.scss'
-import { Link, NavLink, useNavigate, useParams } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { ROUTERS } from '../../constants'
 import { Dropdown, Menu, Space } from 'antd'
-import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
-import { auth, db } from '../../firebase/config'
+import { onAuthStateChanged, signOut } from 'firebase/auth'
+import { auth } from '../../firebase/config'
 import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   REMOVE_ACTIVE_USER,
   selectIsLoggedIn,
-  // selectUserID,
-  // selectUserName,
   SET_ACTIVE_USER,
 } from '../../stores/slice/authSlice'
 import { AdminOnlyLink } from '../adminOnlyRoute/AdminOnlyRoute'
@@ -32,7 +30,6 @@ import {
   selectCartTotalQuantity,
 } from '../../stores/slice/cartSlice'
 import Notiflix from 'notiflix'
-import { addDoc, collection, Timestamp } from 'firebase/firestore'
 
 const Header = () => {
   const nav__links = [
@@ -178,19 +175,29 @@ const Header = () => {
       })
   }
 
-  // 
+  // ComponentDidMount - ComponentDidUpdate
+  // useEffect(callback, dependencies);
+  // CallBack: sẽ được gọi trong useEffect sau khi render lần đầu tiên hoặc khi update dữ liệu
+  // Dependencies: Mảng chứa các đối số mà useEffect phụ thuộc vào để thực thi
+  // + Không cung cấp: useEffect sẽ được gọi thực thi các tính toán bên trong nó mỗi khi thành phần render.
+  // + []: chỉ thực thi một lần duy nhất sau khi thành phần đó render lần đầu tiên (componentDidMount)
+  // + [props, state,..]: Kiểm tra giá trị của props, state mới với giá trị cũ. Nếu khác nhau Calllback sẽ được thực thi
+
+  // ComponentDidMount - Hiển thị tổng số lượng sản phẩm trong giỏ hàng
   useEffect(() => {
     dispatch(cartActions.CALCULATE_TOTAL_QUANTITY())
   }, [])
 
+  // ComponentDidUpdate - Nếu user đang loggedin thì hiển thị thông tin authenticatedMenu ngược lại thì hiển thị unauthenticatedMenu
   useEffect(() => {
     return !isLoggedIn
       ? setMenuList(unauthenticatedMenu)
       : setMenuList(authenticatedMenu)
-  }, [dispatch, isLoggedIn])
+  }, [isLoggedIn])
 
   // Monitor currently sign in user
   useEffect(() => {
+    // Kiểm tra xem người dùng có đang đăng nhập không
     onAuthStateChanged(auth, (user) => {
       if (user) {
         // console.log(user)

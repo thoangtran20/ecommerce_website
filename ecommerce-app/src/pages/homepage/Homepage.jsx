@@ -25,6 +25,7 @@ const Homepage = () => {
     scrollToProducts()
   }, [url])
 
+  // Lấy dữ liệu từ firebase 
   const { data } = useFetchCollection('products')
   const products = useSelector(selectProducts)
   console.log(products)

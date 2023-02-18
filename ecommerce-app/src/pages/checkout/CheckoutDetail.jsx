@@ -27,6 +27,7 @@ const initialAddressState = {
   phone: '',
 }
 
+// Khai báo phoneRegex để validate phone
 const phoneRegex = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/
 
 // const schema = yup.object().shape({
@@ -42,6 +43,7 @@ const phoneRegex = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4
 // })
 
 const CheckoutDetail = () => {
+  // Khởi tạo state shippingAddress bằng cách copy và gán Object ban đầu initialAddressState vào
   const [shippingAddress, setShippingAddress] = useState({
     ...initialAddressState,
   })
@@ -69,12 +71,17 @@ const CheckoutDetail = () => {
 
   // console.log(Object.values(errors))
 
+  // Khai báo dispatch để gọi dispatch đến một action nào đó trong reducer
   const dispatch = useDispatch()
 
+  // Khai báo navigate để điều hướng
   const navigate = useNavigate()
 
+  // Khai báo arrow function handleChange
   const handleChange = (e) => {
+    // gán một object {name, value} = event được gọi lúc nhập dữ liệu vào form
     const { name, value } = e.target
+    // thay đổi giá trị shippingAddress, gán giá trị value cho name
     setShippingAddress({ ...shippingAddress, [name]: value })
   }
 
@@ -83,7 +90,9 @@ const CheckoutDetail = () => {
   const submitCheckout = (e) => {
     console.log(e)
     // e.preventDefault()
+    // gọi antion SAVE_SHIPPING_ADDRESS lưu giá trị shippingAddress từ reducerss
     dispatch(SAVE_SHIPPING_ADDRESS(shippingAddress))
+    // điều hướng đến page checkout
     navigate(ROUTERS.checkout)
     // form.current.reset()
   }

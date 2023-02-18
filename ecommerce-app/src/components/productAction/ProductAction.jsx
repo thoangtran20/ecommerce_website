@@ -14,7 +14,6 @@ import Search from '../search/Search'
 import './ProductAction.scss'
 
 const ProductAction = () => {
-  const [grid, setGrid] = useState(true)
   const products = useSelector(selectProducts)
   // console.log(products)
 
@@ -34,24 +33,15 @@ const ProductAction = () => {
     dispatch(SORT_PRODUCTS({ products, sort }))
   }, [dispatch, products, sort])
 
-
   return (
     <>
       {' '}
       <div className="product__action">
         <div className="top">
           <div className="icons">
-            <BsFillGridFill
-              size={23}
-              color="orangered"
-              onClick={() => setGrid(true)}
-            />
+            <BsFillGridFill size={23} color="orangered" />
 
-            <FaListAlt
-              size={24}
-              color="#006534"
-              onClick={() => setGrid(false)}
-            />
+            <FaListAlt size={24} color="#006534" />
 
             <p>
               <b>{filteredProducts.length}</b> Produts are found
@@ -67,12 +57,7 @@ const ProductAction = () => {
           {/* Sort Product */}
           <div className="sort">
             <label>Sort by:</label>
-            <select
-              name=""
-              id=""
-              value={sort}
-              onChange={(e) => setSort(e.target.value)}
-            >
+            <select value={sort} onChange={(e) => setSort(e.target.value)}>
               <option value="latest">Latest Product</option>
               <option value="lowest-price" key="">
                 Lowest Price

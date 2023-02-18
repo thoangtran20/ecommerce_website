@@ -7,7 +7,6 @@ import styles from './Contact.module.scss'
 import { toast } from 'react-toastify'
 import * as yup from 'yup'
 
-import { Col, Container, Row } from 'reactstrap'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Helmet from '../../components/helmet/Helmet'
@@ -58,7 +57,6 @@ const Contact = () => {
           toast.success('Message sent successfully!!!')
           console.log(res.text)
           form.current.reset()
-          // console.log(form.current)
         },
         (error) => {
           toast.error(error.text)
@@ -72,90 +70,78 @@ const Contact = () => {
         <div className={`wrapper ${styles.contact}`}>
           <h2>Contact Us</h2>
           <div className={styles.section}>
-            <Container>
-              <Row className="mb-5 mt-3">
-                <Col lg="6" md="3">
-                  <form ref={form} onSubmit={handleSubmit(sendEmail)}>
-                    <Card cardClass={styles.card}>
-                      <label>Name</label>
-                      <input
-                        type="text"
-                        name="user_name"
-                        placeholder="Full Name"
-                        {...register('user_name')}
-                      />
-                      <p className={styles.errors}>
-                        {errors.user_name?.message}
-                      </p>
+            <form ref={form} onSubmit={handleSubmit(sendEmail)}>
+              <Card cardClass={styles.card}>
+                <label>Name</label>
+                <input
+                  type="text"
+                  name="user_name"
+                  placeholder="Full Name"
+                  {...register('user_name')}
+                />
+                <p className={styles.errors}>{errors.user_name?.message}</p>
 
-                      <label>Email</label>
-                      <input
-                        type="email"
-                        name="user_email"
-                        placeholder="Your active email"
-                        {...register('user_email')}
-                      />
-                      <p className={styles.errors}>
-                        {errors.user_email?.message}
-                      </p>
+                <label>Email</label>
+                <input
+                  type="email"
+                  name="user_email"
+                  placeholder="Your active email"
+                  {...register('user_email')}
+                />
+                <p className={styles.errors}>{errors.user_email?.message}</p>
 
-                      <label>Subject</label>
-                      <input
-                        type="text"
-                        name="subject"
-                        placeholder="Subject"
-                        {...register('subject')}
-                      />
-                      <p className={styles.errors}>{errors.subject?.message}</p>
+                <label>Subject</label>
+                <input
+                  type="text"
+                  name="subject"
+                  placeholder="Subject"
+                  {...register('subject')}
+                />
+                <p className={styles.errors}>{errors.subject?.message}</p>
 
-                      <label>Message</label>
-                      <textarea
-                        name="message"
-                        cols="30"
-                        rows="10"
-                        {...register('message')}
-                      />
-                      <p className={styles.errors}>{errors.message?.message}</p>
-                      <button
-                        style={{ background: '#FF6363 ' }}
-                        className="--btn --btn-primary"
-                      >
-                        Send Message
-                      </button>
-                    </Card>
-                  </form>
-                </Col>
-                <Col lg="6" md="4" className="mb-5">
-                  <div className={styles.details}>
-                    <Card cardClass={styles.card2}>
-                      <h3>Our Contact Infomation</h3>
-                      <p>
-                        Fill the form or contact us via other channels listed
-                        below
-                      </p>
-                      <div className={styles.icons}>
-                        <span>
-                          <FaPhoneAlt />
-                          <p>+ 84 112 534 879</p>
-                        </span>
-                        <span>
-                          <FaEnvelope />
-                          <p>clothingstore@gmail.com</p>
-                        </span>
-                        <span>
-                          <GoLocation />
-                          <p>Thanh Khe, Da Nang</p>
-                        </span>
-                        <span>
-                          <FaTwitter />
-                          <p>@ThoangTran</p>
-                        </span>
-                      </div>
-                    </Card>
-                  </div>
-                </Col>
-              </Row>
-            </Container>
+                <label>Message</label>
+                <textarea
+                  name="message"
+                  cols="30"
+                  rows="10"
+                  {...register('message')}
+                />
+                <p className={styles.errors}>{errors.message?.message}</p>
+                <button
+                  style={{ background: '#FF6363 ' }}
+                  className="--btn --btn-primary"
+                >
+                  Send Message
+                </button>
+              </Card>
+            </form>
+
+            <div className={styles.details}>
+              <Card cardClass={styles.card2}>
+                <h3>Our Contact Infomation</h3>
+                <p>
+                  Fill the form or contact us via other channels listed below
+                </p>
+                <div className={styles.icons}>
+                  <span>
+                    <FaPhoneAlt />
+                    <p>+ 84 112 534 879</p>
+                  </span>
+                  <span>
+                    <FaEnvelope />
+                    <p>clothingstore@gmail.com</p>
+                  </span>
+                  <span>
+                    <GoLocation />
+                    <p>Thanh Khe, Da Nang</p>
+                  </span>
+                  <span>
+                    <FaTwitter />
+                    <p>@ThoangTran</p>
+                  </span>
+                </div>
+              </Card>
+            </div>
           </div>
         </div>
       </section>

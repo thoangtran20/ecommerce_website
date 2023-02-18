@@ -4,7 +4,6 @@ import styles from './Shop.module.scss'
 import Helmet from '../../components/helmet/Helmet'
 import { Col, Container, Row } from 'reactstrap'
 import ProductAction from '../../components/productAction/ProductAction'
-import Pagination from '../../components/pagination/Pagination'
 import { FaCogs } from 'react-icons/fa'
 import useFetchCollection from '../../customHooks/useFetchCollection'
 import { useDispatch, useSelector } from 'react-redux'
@@ -16,19 +15,17 @@ import {
 import spinnerImg from '../../assets/images/spinner.jpg'
 import ProductListShop from '../productList/ProductListShop'
 import ProductFilter from '../../components/productFilter/ProductFilter'
-import { selectFilteredProducts } from '../../stores/slice/filterSlice'
 
 const Shop = () => {
   const [showFilter, setShowFilter] = useState(false)
   // console.log(showFilter)
 
+  // Lấy
   const { data, isLoading } = useFetchCollection('products')
   const products = useSelector(selectProducts)
   console.log(products)
 
   const dispatch = useDispatch()
-
-  const filteredProducts = useSelector(selectFilteredProducts)
 
   const url = window.location.href
 
@@ -45,8 +42,6 @@ const Shop = () => {
   useEffect(() => {
     scrollToProducts()
   }, [])
-
-  // console.log(products)
 
   useEffect(() => {
     dispatch(
@@ -105,8 +100,6 @@ const Shop = () => {
                   </div>
                 </aside>
               </Col>
-
-              <Col lg="12">{/* <Pagination /> */}</Col>
             </Row>
           </Container>
         </div>

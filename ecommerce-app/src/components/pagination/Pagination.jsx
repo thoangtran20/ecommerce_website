@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
 import { MdOutlineArrowLeft, MdOutlineArrowRight } from 'react-icons/md'
-import { Link } from 'react-router-dom'
 import styles from './Pagination.module.scss'
 
 const Pagination = ({
@@ -13,7 +12,7 @@ const Pagination = ({
   const pageNumbers = []
   const totalPages = totalProducts / productsPerPage
   // Limit the page Numbers shown
-  const [pageNumberLimit, setPageNumberLimit] = useState(5)
+  const [pageNumberLimit] = useState(5)
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5)
   const [minPageNumberLimit, setMinPageNumberLimit] = useState(0)
 

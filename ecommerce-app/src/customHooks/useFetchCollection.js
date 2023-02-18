@@ -7,18 +7,20 @@ const useFetchCollection = (collectionName) => {
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(false)
 
+  // Lấy dữ liệu từ firebase/firestore
   const getCollection = () => {
     setIsLoading(true)
     try {
+      // Lấy db từ firestore theo collectionName
       const docRef = collection(db, collectionName)
+      // truy vấn sắp xếp theo field 'createdAt' sắp xếp theo thứ tự mới đến cũ
       const q = query(docRef, orderBy('createdAt', 'desc'))
       onSnapshot(q, (snapshot) => {
-        // console.log(snapshot.docs);
+        // Lấy tất cả dữ liệu từ firebase theo id collection
         const allData = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }))
-        // console.log(allData);
         setData(allData)
         setIsLoading(false)
       })
@@ -28,6 +30,7 @@ const useFetchCollection = (collectionName) => {
     }
   }
 
+  // Thực thi callback getCollection() trả về data sau khi render lần đầu tiên
   useEffect(() => {
     getCollection()
   }, [])

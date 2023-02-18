@@ -79,10 +79,15 @@
         margin-top: 50px;
       }
     }
+
+    .details {
+      width: 500px;
+      max-width: 100%;
+    }
   }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 699px) {
   .contact {
     .section {
       flex-direction: column;

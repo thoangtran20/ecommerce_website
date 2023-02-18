@@ -11,6 +11,7 @@ import Loader from '../../components/loader/Loader'
 import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import Helmet from '../../components/helmet/Helmet'
 
 const schema = yup.object().shape({
   email: yup
@@ -38,6 +39,7 @@ const Reset = () => {
 
     setIsLoading(true)
 
+    // gửi email để resend password with firebase
     sendPasswordResetEmail(auth, email)
       .then(() => {
         setIsLoading(false)
@@ -62,44 +64,46 @@ const Reset = () => {
   return (
     <>
       {isLoading && <Loader />}
-      <section className={`wrapper ${styles.auth}`}>
-        <div className={styles.img}>
-          <img src={resetImg} alt="Reset Password" width="400" />
-        </div>
-        <Card>
-          {' '}
-          <div className={styles.form}>
-            <h2>Reset Password</h2>
-            <form onSubmit={handleSubmit(resetPassword)}>
-              <input
-                type="text"
-                placeholder="Email"
-                value={email}
-                {...register('email')}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <button
-                type="submit"
-                className="--btn --btn-primary --btn-block"
-                isLoading={isSubmitting}
-                disabled={isSubmitting}
-              >
-                Reset Password
-              </button>
-              <div className={styles.links}>
-                <p>
-                  {' '}
-                  <Link to="/login">- Login</Link>
-                </p>
-                <p>
-                  {' '}
-                  <Link to="/register">- Register</Link>
-                </p>
-              </div>
-            </form>
+      <Helmet>
+        <section className={`wrapper ${styles.auth}`}>
+          <div className={styles.img}>
+            <img src={resetImg} alt="Reset Password" width="400" />
           </div>
-        </Card>
-      </section>
+          <Card>
+            {' '}
+            <div className={styles.form}>
+              <h2>Reset Password</h2>
+              <form onSubmit={handleSubmit(resetPassword)}>
+                <input
+                  type="text"
+                  placeholder="Email"
+                  value={email}
+                  {...register('email')}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <button
+                  type="submit"
+                  className="--btn --btn-primary --btn-block"
+                  isLoading={isSubmitting}
+                  disabled={isSubmitting}
+                >
+                  Reset Password
+                </button>
+                <div className={styles.links}>
+                  <p>
+                    {' '}
+                    <Link to="/login">- Login</Link>
+                  </p>
+                  <p>
+                    {' '}
+                    <Link to="/register">- Register</Link>
+                  </p>
+                </div>
+              </form>
+            </div>
+          </Card>
+        </section>
+      </Helmet>
     </>
   )
 }

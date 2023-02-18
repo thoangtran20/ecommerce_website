@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router'
 import { selectUserID, selectUserName } from '../../stores/slice/authSlice'
-import { selectProducts, STORE_PRODUCTS } from '../../stores/slice/productSlice'
 import spinnerImg from '../../assets/images/spinner.jpg'
 import Card from '../../components/card/Card'
 import StarsRating from 'react-star-rate'
@@ -13,8 +12,6 @@ import { db } from '../../firebase/config'
 import { toast } from 'react-toastify'
 import useFetchDocument from '../../customHooks/useFetchDocument'
 import useFetchCollection from '../../customHooks/useFetchCollection'
-import { selectCartItems } from '../../stores/slice/cartSlice'
-import { selectOrderHistory } from '../../stores/slice/orderSlice'
 import { Form, FormGroup, Label } from 'reactstrap'
 
 const ReviewProducts = () => {
@@ -25,15 +22,19 @@ const ReviewProducts = () => {
   const [product, setProduct] = useState(null)
   console.log(product)
 
+  // Lấy giá trị data theo collection products từ firestore/firebase
   const { data } = useFetchCollection('products')
   console.log(data)
 
+  // Lấy ra id thông qua url được truyền vào
   const { id } = useParams()
   console.log(id)
 
+  // Lấy ra userID từ userSlice trong redux store
   const userID = useSelector(selectUserID)
   const userName = useSelector(selectUserName)
 
+  // khởi tạo navigate để điều hướng sang page khác
   const navigate = useNavigate()
 
   const { document } = useFetchDocument('products', id)
@@ -48,6 +49,7 @@ const ReviewProducts = () => {
 
     const today = new Date()
     const date = today.toDateString()
+    // Khoi tao reviewConfig va set up data
     const reviewConfig = {
       userID,
       userName,
@@ -59,6 +61,7 @@ const ReviewProducts = () => {
     }
     console.log(reviewConfig)
     try {
+      // Them collection reviews vao firestore/firebase
       addDoc(collection(db, 'reviews'), reviewConfig)
       toast.success('Review submitted successfully!!!')
       setRate(0)
@@ -77,7 +80,7 @@ const ReviewProducts = () => {
           <img src={spinnerImg} alt="Loading..." style={{ width: '50px' }} />
         ) : (
           <>
-src/styles            <p>
+            <p>
               <b>Product: </b> {product.name}
             </p>
             <img
